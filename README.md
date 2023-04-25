@@ -74,7 +74,6 @@ Five Level Tagging　(5段階タグ付けアプリ)
 <br>
 
 ### 10. アイテムの画像拡大
-  
 <br>
 
 ### 11. CSSの装飾
@@ -86,6 +85,16 @@ Five Level Tagging　(5段階タグ付けアプリ)
 
 # 要件定義
 [スプレッドシートへのリンク](https://docs.google.com/spreadsheets/d/10B7zKWsc7uPWMbjWP8jSZ0URIDiKXv5PVb-Rytln0PM/edit#gid=219665282)  
+<br>
+
+# データベース設計
+![画像：ER図](app/assets/images/ER.png)
+<br>
+<br>
+
+# 画面遷移図
+![画像：画面遷移図](app/assets/images/PageTransition.png)
+<br>
 <br>
 
 # 開発環境
