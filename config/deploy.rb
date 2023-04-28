@@ -7,6 +7,10 @@ set :application, 'five_level_tagging'
 # どのリポジトリからアプリをpullするかを指定する
 set :repo_url,  'git@github.com:avocado-don/five_level_tagging.git'
 
+# Gitから参照するブランチ名を「master」から「main」に修正(git archive master → git archive main)
+# 2021.06.07のGit仕様変更に、Capistranoが未対応のため
+set :branch, "main"
+
 # バージョンが変わっても共通で参照するディレクトリを指定
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
