@@ -1,0 +1,28 @@
+/* 一通りの機能を実装するまでは、簡易的な仮の装飾に留める。 */
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: #000;
+}
+
+a:visited {
+  color: #666;
+}
+
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+header {
+  background-color: #f1f8fe;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+.wrapper {
+  margin: 20px;
+}

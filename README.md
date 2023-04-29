@@ -2,6 +2,11 @@
 Five Level Tagging　(5段階タグ付けアプリ)  
 <br>
 
+# アプリケーションURL
+http://3.115.163.111/  
+<br>
+<br>
+
 # アプリケーション概要
 (1)リストの各項目(アイテム)に最大4種の「特徴タグ」と「5段階スコア」を登録することで、特徴の数値化・一覧化ができる。  
 (2)他ユーザーの作ったリストやアイテム(タグ・スコア)も含め、並び替え・検索ができる。  
@@ -32,6 +37,7 @@ Five Level Tagging　(5段階タグ付けアプリ)
 　公開リストなら見知らぬ人と、限定公開リストなら企業内やチーム内で、共同編集も可能になる。  
 　今回はリスト・タグのジャンルを限定しないことで、様々な業務あるいは趣味の記録にも対応可能性を広げた。  
 　(仮に大規模市場または特定業界向けで運用するなら、ジャンル別のUIやDBでアプリを独立させた方が実用的か。)  
+<br>
 <br>
 
 # 実装予定の機能
@@ -80,11 +86,12 @@ Five Level Tagging　(5段階タグ付けアプリ)
 <br>
 
 ### 12. CSSの装飾
+※上記一通りの機能を実装するまでは、簡易的な仮の装飾に留める。
 <br>
 <br>
 
 # 要件定義
-[スプレッドシートへのリンク](https://docs.google.com/spreadsheets/d/10B7zKWsc7uPWMbjWP8jSZ0URIDiKXv5PVb-Rytln0PM/edit#gid=219665282)  
+[リンク：Googleスプレッドシート](https://docs.google.com/spreadsheets/d/10B7zKWsc7uPWMbjWP8jSZ0URIDiKXv5PVb-Rytln0PM/edit#gid=219665282)  
 <br>
 
 # データベース設計
@@ -98,5 +105,7 @@ Five Level Tagging　(5段階タグ付けアプリ)
 <br>
 
 # 開発環境
-HTML・CSS・Ruby・JavaScript・SQL・AWS  
+HTML・CSS・Ruby・JavaScript・SQL・GitHub・AWS  
+[リンク：GitHubリポジトリ](https://github.com/avocado-don/five_level_tagging)  
+[リンク：GitHubプロジェクトボード](https://github.com/users/avocado-don/projects/2/views/1)  
 <br>
