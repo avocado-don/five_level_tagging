@@ -10,7 +10,7 @@
 
     <div class="field">
       <%= f.label :password, "パスワード" %><br>
-      <%= f.password_field :password, autocomplete: "current-password", placeholder:"英数字6文字以上" %>
+      <%= f.password_field :password, autocomplete: "current-password", maxlength: "16", placeholder: "半角英数8~16文字" %>
       <br><br>
     </div>
 
