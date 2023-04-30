@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <h2>ユーザー登録</h2>
+
+  <%= form_with model: @user, url: user_registration_path, local: true do |f| %>
+    <div class="field">
+      <%= f.label :email, "Eメール [必須・非公開]" %><br>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <br><br>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, "パスワード [必須・非公開]" %><br>
+      <%= f.password_field :password, autocomplete: "new-password", placeholder:"英数字6文字以上" %>
+      <br><br>
+    </div>
+
+    <div class="field">
+      <%= f.label :password_confirmation, "パスワード確認" %><br>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+      <br><br>
+    </div>
+
+    <div class="field">
+      <%= f.label :real_name, "本名 [必須・非公開]" %><br>
+      <%= f.text_field :real_name, maxlength: "30", placeholder: "30文字以内" %>
+      <br><br>
+    </div>
+
+    <div class="field">
+      <%= f.label :user_name, "ユーザー名 [必須・公開]" %><br>
+      <%= f.text_field :user_name, maxlength: "30", placeholder: "30文字以内" %>
+      <br><br>
+    </div>
+
+    <div class="field">
+      <%= f.label :contact, "連絡先 [任意・公開]" %><br>
+      <%= f.text_area :contact, maxlength: "100", placeholder: "100文字以内", size: "50x5" %>
+      <br><br>
+    </div>
+
+    <div class="field">
+      <%= f.label :profile, "自己紹介 [任意・公開]" %><br>
+      <%= f.text_area :profile, maxlength: "200", placeholder: "200文字以内", size: "50x5" %>
+      <br><br>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "送信" %>
+    </div>
+  <% end %>
+</div>

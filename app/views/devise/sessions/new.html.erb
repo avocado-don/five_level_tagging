@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <h2>ログイン</h2>
+
+  <%= form_with model: @user, url: user_session_path, local: true do |f| %>
+    <div class="field">
+      <%= f.label :email, "Eメール" %><br>
+      <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <br><br>
+    </div>
+
+    <div class="field">
+      <%= f.label :password, "パスワード" %><br>
+      <%= f.password_field :password, autocomplete: "current-password", placeholder:"英数字6文字以上" %>
+      <br><br>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "送信" %>
+    </div>
+  <% end %>
+</div>
