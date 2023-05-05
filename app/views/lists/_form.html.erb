@@ -1,0 +1,23 @@
+<%= form_with model: @list, local: true do |f| %>
+  <div class="field">
+    <%= f.label :title, "リストタイトル [必須]" %><br>
+    <%= f.text_field :title, autofocus: true %>
+    <br><br>
+  </div>
+
+  <div class="field">
+    <%= f.label :concept, "コンセプト [任意]" %><br>
+    <%= f.text_area :concept, size: "50x5" %>
+    <br><br>
+  </div>
+
+  <div class="field">
+    <%= f.label :score_rule, "数値化ルール [任意]" %><br>
+    <%= f.text_area :score_rule, size: "50x5", placeholder: "タグのスコア1~5それぞれの段階・程度を表す言葉や代表例などの記載を推奨。" %>
+    <br><br>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "送信" %>
+  </div>
+<% end %>
