@@ -1,0 +1,24 @@
+<div class="wrapper">
+  <br>
+  <%= link_to "リスト一覧へ戻る", lists_path %>
+  <br><br>
+
+  <h2><%= "リスト：#{@list.title}" %></h2>
+  <br>
+
+  <%= "作者名：#{@list.user.user_name}" %>
+  <% if user_signed_in? && current_user.id == @list.user_id %>
+    　　　<%= link_to "リスト編集", edit_list_path(@list.id) %>
+    　　　<%= link_to "リスト削除", list_path(@list.id), method: :delete, data: { confirm: "このリストを削除してもよろしいですか？\nリスト内のアイテムも全て削除されます。" } %>
+  <% end %>
+  <br><br>
+
+  <%# application_helper.rb(safe_linebreak) レコードカラム内の改行を、HTML上で安全に表示させる。 %>
+  <h4>コンセプト</h4>
+  <p style="line-height:75%"><%= safe_linebreak(@list.concept) %></p>
+  <br>
+
+  <h4>数値化ルール</h4>
+  <p style="line-height:75%"><%= safe_linebreak(@list.score_rule) %></p>
+  <br>
+</div>
