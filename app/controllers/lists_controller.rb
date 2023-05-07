@@ -4,7 +4,7 @@ class ListsController < ApplicationController
 
   def index
     @q = List.ransack(params[:q])
-    @lists = @q.result.order("created_at DESC")
+    @lists = @q.result.order("updated_at DESC")
   end
 
   def new
