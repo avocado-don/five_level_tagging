@@ -21,6 +21,9 @@ class ListsController < ApplicationController
   end
 
   def show
+    list_item = Item.where(list_id: @list.id)
+    @q = list_item.ransack(params[:q])
+    @items = @q.result.order("updated_at DESC")
   end
 
   def edit

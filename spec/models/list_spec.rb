@@ -28,5 +28,11 @@ RSpec.describe List, type: :model do
         expect(@list.errors.full_messages).to include("Title can't be blank")
       end
     end
+
+    it 'user が紐付いていないと保存できない' do
+      @list.user = nil
+      @list.valid?
+      expect(@list.errors.full_messages).to include("User must exist")
+    end
   end
 end

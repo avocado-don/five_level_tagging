@@ -1,0 +1,9 @@
+<div class="wrapper">
+  <br>
+  <%= link_to "リストへ戻る：#{@list.title}", list_path(@list.id) %>
+  <br><br>
+
+  <h2>アイテム（リスト内項目）新規投稿</h2>
+
+  <%= render partial: "form", locals: { url: list_items_path(list_id: @list.id), method: :post } %>
+</div>

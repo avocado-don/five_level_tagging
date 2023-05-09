@@ -1,7 +1,7 @@
 <%= form_with model: @list, local: true do |f| %>
   <div class="field">
     <%= f.label :title, "リストタイトル [必須]" %><br>
-    <%= f.text_field :title, autofocus: true %>
+    <%= f.text_field :title, size: "50x1", autofocus: true %>
     <br><br>
   </div>
 

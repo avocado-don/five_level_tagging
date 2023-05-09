@@ -1,0 +1,26 @@
+<%= form_with model: @item_form, url: url, method: method, local: true do |f| %>
+  <div class="field">
+    <%= f.label :item_name, "アイテム名 [必須]" %><br>
+    <%= f.text_field :item_name, size: "50x1", autofocus: true %>
+    <br><br>
+  </div>
+
+  <div class="field">
+    <%= f.label :description, "説明 [任意]" %><br>
+    <%= f.text_area :description, size: "50x5" %>
+    <br /><br />
+  </div>
+
+  <%# 画像ファイル選択ボタンを4つ実装(multipleは不使用) ：別ディレクトリから選択可。ファイル名を別個に表示可。 %>
+  <div class="actions">
+    <%= f.label :images, "画像（最大4枚） [任意]" %><br>
+      <% 4.times do %>
+        <%= f.file_field :images, name: "item_form[images][]" %><br>
+      <% end %>
+    <br><br>
+  </div>
+
+  <div class="actions">
+    <%= f.submit '送信' %>
+  </div>
+<% end %>
