@@ -46,7 +46,12 @@
             <tbody>
               <tr>
                 <td width="25%">
-                  　<font size="1"><%= item.updated_at.to_s(:datetime_jp) %></font><br><br>
+                  　<font size="1"><%= item.updated_at.to_s(:datetime_jp) %></font>
+                  <% if user_signed_in? && current_user.id == @list.user_id %>
+                    　<%= link_to "編集", edit_list_item_path(list_id: @list.id, id: item.id) %>
+                    　<%= link_to "削除", list_item_path(list_id: @list.id, id: item.id), method: :delete, data: { confirm: "このアイテムを削除してもよろしいですか？" } %>
+                  <% end %>
+                  <br><br>
                   <b><%= item.item_name %></b>
                 </td>
 

@@ -13,4 +13,8 @@ class ItemForm
   def save
     Item.create(item_name: item_name, description: description, list_id: list_id, images: images)
   end
+
+  def update(params, item)
+    item.update(params)
+  end
 end
