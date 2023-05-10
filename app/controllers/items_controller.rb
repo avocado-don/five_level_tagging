@@ -39,7 +39,7 @@ class ItemsController < ApplicationController
 
   private
   def item_form_params
-    params.require(:item_form).permit(:item_name, :description, images: []).merge(list_id: params[:list_id])
+    params.require(:item_form).permit(:item_name, :description, images: [], tag_names: [], scores: []).merge(list_id: params[:list_id])
   end
 
   def set_list

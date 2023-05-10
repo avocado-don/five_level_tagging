@@ -68,7 +68,9 @@
 
               <tr height="25">
                 <% 4.times do |i| %>
-                  <td>
+                  <td width="25%">
+                    <%= item.tags[i]&.tag_name %>
+                    <%= "：#{item.item_tags[i].score}" if item.item_tags[i]&.score %>
                   </td>
                 <% end %>
               </tr>

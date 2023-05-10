@@ -8,7 +8,7 @@
   <div class="field">
     <%= f.label :description, "説明 [任意]" %><br>
     <%= f.text_area :description, size: "50x5" %>
-    <br /><br />
+    <br><br>
   </div>
 
   <%# 画像ファイル選択ボタンを4つ実装(multipleは不使用) ：別ディレクトリから選択可。ファイル名を別個に表示可。 %>
@@ -19,6 +19,20 @@
       <% end %>
     <br><br>
   </div>
+
+  <% 4.times do |i| %>
+    <div class="field">
+      <%= f.label :tag_name, "タグ名(#{i+1}) [任意]" %>
+      <%= f.text_field :tag_name, name: "item_form[tag_names][]", maxlength: "25", placeholder: "25文字以内", size: "50x1" %>
+      <br><br>
+    </div>
+
+    <div class="field">
+      <%= f.label :score, "スコア(#{i+1}) [任意]" %>
+      <%= f.number_field :score, name: "item_form[scores][]", min: 1, max: 5 %>
+      <br><br><br>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= f.submit '送信' %>

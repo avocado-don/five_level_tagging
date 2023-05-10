@@ -4,7 +4,7 @@ class ListsController < ApplicationController
 
   def index
     @q = List.ransack(params[:q])
-    @lists = @q.result.order("updated_at DESC")
+    @lists = @q.result.includes(:user).order("updated_at DESC")
   end
 
   def new
@@ -23,7 +23,7 @@ class ListsController < ApplicationController
   def show
     list_item = Item.where(list_id: @list.id)
     @q = list_item.ransack(params[:q])
-    @items = @q.result.order("updated_at DESC")
+    @items = @q.result.includes(:tags).order("updated_at DESC")
   end
 
   def edit
