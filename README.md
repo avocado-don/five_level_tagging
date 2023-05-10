@@ -117,7 +117,7 @@ HTML・CSS・Ruby・JavaScript・SQL・GitHub・AWS
 # 工夫した点
 <br>
 
-## [ 1 ] 1つのアイテムに紐づく4組のタグとスコアを、アイテム投稿ボタン1クリックで保存可能にする。  
+## [ 1 ] 1つのアイテムに紐づく4組のタグとスコアを、アイテム投稿ボタン1クリックで保存可能にする。
 　上記「実装済みの機能」の「2. アイテム(リスト内の各項目)・タグ・スコアの投稿」に該当。  
 <br>
 
@@ -136,8 +136,7 @@ HTML・CSS・Ruby・JavaScript・SQL・GitHub・AWS
 
 ### (3)タグ(tag_name)・スコア(score)4つずつを、配列に格納して送信。
 
-　text_fieldのname属性をitem_form[tag_names][]
-、item_form[scores][]と設定。  
+　text_fieldのname属性をitem_form[tag_names][]、item_form[scores][]と設定。  
 <br>
 ![画像：工夫1-3](app/assets/images/readme/point1-3.png)
 <br>
@@ -173,5 +172,38 @@ HTML・CSS・Ruby・JavaScript・SQL・GitHub・AWS
 　タグは存在し、スコアが存在しなければ、アイテム・タグのみの紐付けを保存する。  
 <br>
 ![画像：工夫1-6](app/assets/images/readme/point1-6.png)
+<br>
+<br>
+
+### (7)editアクション：アイテムに紐づく複数レコードのカラムを指定し、タグ・スコアの値を配列として取得する。
+
+　pluckメソッド：itemに紐づく(tags / item_tags)レコードの(tag_name / score)カラムの値を配列化。  
+
+　※newアクション：フォームに部分テンプレートを用いているため、投稿フォームのエラーを回避するうえで、空のインスタンスを用意する。  
+よりスマートな方法がある気はするが、限られた時間で仮説検証してエラー回避できたので、更なる開発を優先する。  
+<br>
+![画像：工夫1-7](app/assets/images/readme/point1-7.png)
+<br>
+<br>
+
+### (8)アイテム編集フォーム：保存済みタグ・スコアの値を、入力欄の初期値として読み込む。
+
+　配列(@item_form.tag_names / @item_form.scores)から値を順次取り出し、入力欄の初期値(value)として読み込む。  
+　(入力欄を4つ生成するための)繰り返し処理(times)の際にブロック変数(index)も生成し、配列の添字[index]として使うことで、値を取り出す。  
+<br>
+![画像：工夫1-8](app/assets/images/readme/point1-8.png)
+<br>
+<br>
+
+### (9)フォームオブジェクト内でupdateメソッドを作り、アイテム・タグ・スコアを更新する。
+
+　アイテムとタグの既存の紐付け(item_tags)をいったん削除(destroy_all)する。  
+
+　タグ・スコアをparamsから削除(delete)しつつ、その返り値を使ってタグ・スコアの配列(tag_names / scores)を定義する(のちの更新処理に使う)。  
+　アイテムに関する情報だけが残ったparamsを使い、アイテムを更新する。  
+
+　以降、タグ・スコアの更新処理は新規保存時と同様。  
+<br>
+![画像：工夫1-9](app/assets/images/readme/point1-9.png)
 <br>
 <br>

@@ -23,13 +23,13 @@
   <% 4.times do |i| %>
     <div class="field">
       <%= f.label :tag_name, "タグ名(#{i+1}) [任意]" %>
-      <%= f.text_field :tag_name, name: "item_form[tag_names][]", maxlength: "25", placeholder: "25文字以内", size: "50x1" %>
+      <%= f.text_field :tag_name, name: "item_form[tag_names][]", value: @item_form.tag_names[i], maxlength: "25", placeholder: "25文字以内", size: "50x1" %>
       <br><br>
     </div>
 
     <div class="field">
       <%= f.label :score, "スコア(#{i+1}) [任意]" %>
-      <%= f.number_field :score, name: "item_form[scores][]", min: 1, max: 5 %>
+      <%= f.number_field :score, name: "item_form[scores][]", value: @item_form.scores[i], min: 1, max: 5 %>
       <br><br><br>
     </div>
   <% end %>

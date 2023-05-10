@@ -4,6 +4,8 @@ class ItemsController < ApplicationController
 
   def new
     @item_form = ItemForm.new
+    @item_form.tag_names = ""
+    @item_form.scores = ""
   end
 
   def create
@@ -19,11 +21,12 @@ class ItemsController < ApplicationController
   def edit
     redirect_to list_path(@list.id) unless current_user.id == @list.user_id
     @item_form = ItemForm.new(@item.attributes)
+    @item_form.tag_names = @item.tags.pluck(:tag_name)
+    @item_form.scores = @item.item_tags.pluck(:score)
   end
 
   def update
     @item_form = ItemForm.new(item_form_params)
-
     if @item_form.valid?
       @item_form.update(item_form_params, @item)
       redirect_to list_path(@list.id)
