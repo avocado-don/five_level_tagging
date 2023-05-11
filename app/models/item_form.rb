@@ -5,12 +5,14 @@ class ItemForm
     :id, :created_at, :updated_at,
     :item_name, :description, :list_id,
     :images,
-    :tag_names,
-    :scores, :item_id, :tag_id
+    :tag_names, :tag_name,
+    :scores, :score, :item_id, :tag_id
   )
 
   validates :item_name, presence: true
   validates :images, :tag_names, :scores, length: { maximum: 4 }
+  validates :tag_name, length: { maximum: 25 }
+  validates :score, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }, allow_blank: true
 
   def save
     item = Item.create(item_name: item_name, description: description, list_id: list_id, images: images)

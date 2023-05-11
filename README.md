@@ -114,6 +114,13 @@ HTML・CSS・Ruby・JavaScript・SQL・GitHub・AWS
 [リンク：GitHubプロジェクトボード](https://github.com/users/avocado-don/projects/2/views/1)　※各タスク内に作成手順を記録。  
 <br>
 
+# ローカルでの動作方法
+% git clone https://github.com/avocado-don/five_level_tagging  
+% cd five_level_tagging  
+% bundle install  
+<br>
+<br>
+
 # 工夫した点
 <br>
 

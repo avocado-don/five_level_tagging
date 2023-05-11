@@ -22,7 +22,7 @@ RSpec.describe List, type: :model do
     end
 
     context '新規投稿できない場合' do
-      it 'title が空では投稿できない' do
+      it 'title が空では保存できない' do
         @list.title = ""
         @list.valid?
         expect(@list.errors.full_messages).to include("Title can't be blank")
