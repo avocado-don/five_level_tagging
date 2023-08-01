@@ -7,7 +7,7 @@ RSpec.describe List, type: :model do
 
   describe 'リスト新規投稿' do
     context '新規投稿できる場合' do
-      it '3項目を適切に入力する: title, concept, score_rule' do
+      it '3項目を適切に入力する: title, concept, rule' do
         expect(@list).to be_valid
       end
 
@@ -15,8 +15,8 @@ RSpec.describe List, type: :model do
         @list.concept = ""
         expect(@list).to be_valid
       end
-      it 'score_rule は空でも保存できる' do
-        @list.score_rule = ""
+      it 'rule は空でも保存できる' do
+        @list.rule = ""
         expect(@list).to be_valid
       end
     end

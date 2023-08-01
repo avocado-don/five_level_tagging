@@ -14,16 +14,16 @@
   <br><br>
 
   <%# application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
-  <h4>コンセプト</h4>
+  <h4>●コンセプト</h4>
   <p><%= safe_linebreak(@list.concept) %></p>
   <br>
 
-  <h4>数値化ルール</h4>
-  <p><%= safe_linebreak(@list.score_rule) %></p>
+  <h4>●リスト作成ルール</h4>
+  <p><%= safe_linebreak(@list.rule) %></p>
   <br><br>
 
-  <b>アイテム（リスト内項目）</b>
-  <%= "総数：#{@items.count}" %>　　　
+  <b>●アイテム（リスト内項目）</b>
+  <%= "投稿総数：#{@items.count}" %>　　　
   <% if user_signed_in? && current_user.id == @list.user_id %>
     <%= link_to "アイテム新規投稿", new_list_item_path(list_id: @list.id) %>　　　
   <% end %>

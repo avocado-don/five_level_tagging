@@ -6,6 +6,6 @@ FactoryBot.define do
 
     title { Faker::Commerce.department }
     concept { Faker::Lorem.sentence }
-    score_rule { Faker::Lorem.paragraph }
+    rule { Faker::Lorem.paragraph }
   end
 end

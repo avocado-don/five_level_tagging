@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 2023_05_09_145259) do
   create_table "lists", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title", null: false
     t.text "concept"
-    t.text "score_rule"
+    t.text "rule"
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
