@@ -29,7 +29,6 @@ class ItemsController < ApplicationController
     @item_form = ItemForm.new(item_form_params)
     if @item_form.valid?
       @item_form.update(item_form_params, @item)
-      @list.update_attributes(updated_at: @item.updated_at)
       redirect_to list_path(@list.id)
     else
       render :edit

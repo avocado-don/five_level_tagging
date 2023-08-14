@@ -20,9 +20,10 @@
 
   <h4>●リスト作成ルール</h4>
   <p><%= safe_linebreak(@list.rule) %></p>
-  <br><br>
+  <br>
 
-  <b>●アイテム（リスト内項目）</b>
+  <h4>●アイテム（リスト内項目）</h4>
+  <p>※画像を原寸大サイズで表示：画像を右クリック→新しいタブで画像を開く</p>
   <%= "投稿総数：#{@items.count}" %>　　　
   <% if user_signed_in? && current_user.id == @list.user_id %>
     <%= link_to "アイテム新規投稿", new_list_item_path(list_id: @list.id) %>　　　
@@ -60,7 +61,7 @@
                 <td width="25%">
                   <% if item.images.attached? %>
                     <% item.images.each do |image| %>
-                      <%= image_tag image.variant(resize: '50x50') %>
+                      <%= image_tag image, width: 50 %>
                     <% end %>
                   <% end %>
                 </td>
