@@ -18,13 +18,13 @@
     </thead>
 
     <%# style.css(.td_nowrap) ：tableのセル内に1行で収まらないテキストを、折り返さず省略する。 %>
-    <%# application.rb(time_zone) ：time_formats.rb(:datetime_jp) 更新日時のJST表示(ソート用) %>
+    <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
     <tbody>
       <% @lists.each do |list| %>
           <tr>
             <td class="td_nowrap"><%= link_to "#{list.title}", list_path(list.id) %></td>
             <td class="td_nowrap"><%= list.concept %></td>
-            <td class="td_nowrap"><%= list.user.user_name %></td>
+            <td class="td_nowrap"><%= link_to "#{list.user.user_name}", user_path(list.user_id) %></td>
             <td class="td_nowrap"><%= list.updated_at.to_s(:datetime_jp) %></td>
           </tr>
       <% end %>

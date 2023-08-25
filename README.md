@@ -179,7 +179,7 @@
 
 # [ 3 ] 開発の概要
 ## 3-1. 要件定義
-[リンク：Googleスプレッドシート](https://docs.google.com/spreadsheets/d/10B7zKWsc7uPWMbjWP8jSZ0URIDiKXv5PVb-Rytln0PM/edit?usp=sharing)  
+[リンク：Googleスプレッドシート](https://docs.google.com/spreadsheets/d/10B7zKWsc7uPWMbjWP8jSZ0URIDiKXv5PVb-Rytln0PM/edit?pli=1#gid=219665282)  
 <br>
 ![画像：3-1(A)RequirementDefinition](app/assets/images/readme/3-1(A)RequirementDefinition.png)
 <br>

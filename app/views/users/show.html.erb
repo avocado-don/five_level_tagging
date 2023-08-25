@@ -1,0 +1,51 @@
+<div class="wrapper">
+  <br>
+  <%= "ユーザー一覧へ戻る" %>
+  <% if user_signed_in? && current_user.id == @user.id %>
+    　　　<%= "ユーザー編集" %>
+    　　　<%= "ユーザー削除" %>
+  <% end %>
+  <br><br>
+
+  <h2><%= "ユーザー詳細：#{@user.user_name}" %></h2>
+  <br>
+
+  <%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
+  <h4>●連絡先</h4>
+  <p><%= safe_linebreak(@user.contact) %></p>
+  <br>
+
+  <h4>●自己紹介</h4>
+  <p><%= safe_linebreak(@user.profile) %></p>
+  <br>
+
+  <h4>●ユーザーが投稿したリスト一覧</h4>
+  <%= "投稿総数：#{@lists.count}　　　※列の見出しをクリックして並び替え" %>
+  <% if user_signed_in? && current_user.id == @user.id %>
+    　　　<%= link_to "リスト新規投稿", new_list_path %>
+  <% end %>
+  <br><br>
+
+  <table>
+    <table border="1" width="1200">
+    <thead>
+      <tr>
+        <th width="25%"><%= sort_link(@q, :title, "リストタイトル") %></th>
+        <th width="60%">コンセプト</th>
+        <th width="15%"><%= sort_link(@q, :updated_at, "更新日時") %></th>
+      </tr>
+    </thead>
+
+    <%# style.css(.td_nowrap) ：tableのセル内に1行で収まらないテキストを、折り返さず省略する。 %>
+    <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
+    <tbody>
+      <% @lists.each do |list| %>
+          <tr>
+            <td class="td_nowrap"><%= link_to "#{list.title}", list_path(list.id) %></td>
+            <td class="td_nowrap"><%= list.concept %></td>
+            <td class="td_nowrap"><%= list.updated_at.to_s(:datetime_jp) %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

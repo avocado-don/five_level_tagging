@@ -7,7 +7,7 @@ RSpec.describe ItemForm, type: :model do
 
     @item_form.images = []
     4.times do
-      image = fixture_file_upload('app/assets/images/readme/ER.png')
+      image = fixture_file_upload('db/seeds/images/item1-1.png')
       @item_form.images << image
     end
 
@@ -58,7 +58,7 @@ RSpec.describe ItemForm, type: :model do
       end
 
       it 'images の要素数が5個以上では保存できない' do
-        image = fixture_file_upload("app/assets/images/readme/ER.png")
+        image = fixture_file_upload('db/seeds/images/item1-1.png')
         @item_form.images << image
         expect(@item_form.errors.added?(:images, :too_short, count: 4)).to be false
       end
