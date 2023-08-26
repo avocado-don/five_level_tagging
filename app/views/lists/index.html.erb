@@ -1,10 +1,14 @@
 <div class="wrapper">
   <br>
-  <p><%= link_to "リスト新規投稿（ログイン中のみ）", new_list_path %></p>
-  <br>
+  <%= "ワード検索" %>　　　
+  <%= "タグ検索" %>　　　
+  <%= link_to "ユーザー一覧", users_path %>
+  <br><br>
 
   <h2>全ユーザーが投稿したリスト一覧</h2>
-  <p><%= "投稿総数：#{@lists.count}　　　※列の見出しをクリックして並び替え" %></p>
+  <%= "投稿総数：#{@lists.count}　　　※列の見出しをクリックして並び替え" %>　　　
+  <%= link_to "リスト新規投稿（ログイン中のみ）", new_list_path %>
+  <br><br>
 
   <table>
     <table border="1" width="1200">
@@ -13,7 +17,7 @@
         <th width="20%"><%= sort_link(@q, :title, "リストタイトル") %></th>
         <th width="50%">コンセプト</th>
         <th width="15%"><%= sort_link(@q, :user_user_name, "作者名") %></th>
-        <th width="15%"><%= sort_link(@q, :updated_at, "更新日時") %></th>
+        <th width="15%"><%= sort_link(@q, :updated_at, "リスト更新日時") %></th>
       </tr>
     </thead>
 
@@ -21,12 +25,12 @@
     <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
     <tbody>
       <% @lists.each do |list| %>
-          <tr>
-            <td class="td_nowrap"><%= link_to "#{list.title}", list_path(list.id) %></td>
-            <td class="td_nowrap"><%= list.concept %></td>
-            <td class="td_nowrap"><%= link_to "#{list.user.user_name}", user_path(list.user_id) %></td>
-            <td class="td_nowrap"><%= list.updated_at.to_s(:datetime_jp) %></td>
-          </tr>
+        <tr>
+          <td class="td_nowrap"><%= link_to "#{list.title}", list_path(list.id) %></td>
+          <td class="td_nowrap"><%= list.concept %></td>
+          <td class="td_nowrap"><%= link_to "#{list.user.user_name}", user_path(list.user_id) %></td>
+          <td class="td_nowrap"><%= list.updated_at.to_s(:datetime_jp) %></td>
+        </tr>
       <% end %>
     </tbody>
   </table>

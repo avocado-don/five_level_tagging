@@ -1,0 +1,35 @@
+<div class="wrapper">
+  <br>
+  <%= link_to "リスト一覧へ戻る", lists_path %>
+  <br><br>
+
+  <h2>リストを投稿したユーザー一覧</h2>
+  <%= "ユーザー総数：#{@users.count}　　　※列の見出しをクリックして並び替え" %>
+  <br><br>
+
+  <table>
+    <table border="1" width="1200">
+    <thead>
+      <tr>
+        <th width="20%"><%= sort_link(@q, :user_name, "ユーザー名") %></th>
+        <th width="50%">自己紹介</th>
+        <th width="15%"><%= sort_link(@q, :lists_title, "最新リストタイトル") %></th>
+        <th width="15%"><%= sort_link(@q, :lists_updated_at, "最新リスト更新日時") %></th>
+      </tr>
+    </thead>
+
+    <%# style.css(.td_nowrap) ：tableのセル内に1行で収まらないテキストを、折り返さず省略する。 %>
+    <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
+    <tbody>
+      <% @users.each do |user| %>
+        <% latest_list = user.lists.order("updated_at").last %>
+        <tr>
+          <td class="td_nowrap"><%= link_to "#{user.user_name}", user_path(user.id) %></td>
+          <td class="td_nowrap"><%= user.profile %></td>
+          <td class="td_nowrap"><%= link_to "#{latest_list.title}", list_path(latest_list.id) %></td>
+          <td class="td_nowrap"><%= latest_list.updated_at.to_s(:datetime_jp) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

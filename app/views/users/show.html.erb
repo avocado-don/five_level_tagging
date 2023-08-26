@@ -1,6 +1,6 @@
 <div class="wrapper">
   <br>
-  <%= "ユーザー一覧へ戻る" %>
+  <%= link_to "ユーザー一覧へ戻る", users_path %>
   <% if user_signed_in? && current_user.id == @user.id %>
     　　　<%= "ユーザー編集" %>
     　　　<%= "ユーザー削除" %>
@@ -40,11 +40,11 @@
     <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
     <tbody>
       <% @lists.each do |list| %>
-          <tr>
-            <td class="td_nowrap"><%= link_to "#{list.title}", list_path(list.id) %></td>
-            <td class="td_nowrap"><%= list.concept %></td>
-            <td class="td_nowrap"><%= list.updated_at.to_s(:datetime_jp) %></td>
-          </tr>
+        <tr>
+          <td class="td_nowrap"><%= link_to "#{list.title}", list_path(list.id) %></td>
+          <td class="td_nowrap"><%= list.concept %></td>
+          <td class="td_nowrap"><%= list.updated_at.to_s(:datetime_jp) %></td>
+        </tr>
       <% end %>
     </tbody>
   </table>
