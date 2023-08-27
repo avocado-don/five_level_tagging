@@ -2,8 +2,8 @@
   <br>
   <%= link_to "ユーザー一覧へ戻る", users_path %>
   <% if user_signed_in? && current_user.id == @user.id %>
-    　　　<%= "ユーザー編集" %>
-    　　　<%= "ユーザー削除" %>
+    　　　<%= link_to "ユーザーアカウント編集", edit_user_registration_path %>
+    　　　<%= link_to "ユーザーアカウント削除", user_registration_path, method: :delete, data: { confirm: "ユーザーアカウントを削除してもよろしいですか？\n投稿したリスト・アイテム・スコアも全て削除されます。" } %>
   <% end %>
   <br><br>
 
@@ -32,7 +32,7 @@
       <tr>
         <th width="25%"><%= sort_link(@q, :title, "リストタイトル") %></th>
         <th width="60%">コンセプト</th>
-        <th width="15%"><%= sort_link(@q, :updated_at, "更新日時") %></th>
+        <th width="15%"><%= sort_link(@q, :updated_at, "リスト更新日時") %></th>
       </tr>
     </thead>
 
