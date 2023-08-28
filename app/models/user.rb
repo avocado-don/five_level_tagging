@@ -1,6 +1,20 @@
 class User < ApplicationRecord
   has_many :lists, dependent: :destroy
 
+  # users_controller.rb (def index) ：各ユーザーが更新した最新のリスト1件ずつを取得する(N+1を回避)。
+  has_one :latest_list, -> {
+    where(
+      <<~SQL
+        NOT EXISTS (
+          SELECT 1 FROM lists AS l
+            WHERE
+              lists.updated_at < l.updated_at AND
+              lists.user_id = l.user_id
+        )
+      SQL
+    )
+  }, class_name: "List"
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,

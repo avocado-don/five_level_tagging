@@ -4,7 +4,8 @@ class ListsController < ApplicationController
 
   def index
     @q = List.ransack(params[:q])
-    @lists = @q.result.includes(:user).order("updated_at DESC")
+    @q.sorts = "updated_at DESC" if @q.sorts.empty?
+    @lists = @q.result.includes(:user)
   end
 
   def new
@@ -22,7 +23,8 @@ class ListsController < ApplicationController
 
   def show
     @q = @list.items.ransack(params[:q])
-    @items = @q.result.includes(:tags).order("updated_at DESC")
+    @q.sorts = "updated_at DESC" if @q.sorts.empty?
+    @items = @q.result.includes(:tags)
   end
 
   def edit
