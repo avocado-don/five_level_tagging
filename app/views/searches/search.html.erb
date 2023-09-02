@@ -1,0 +1,126 @@
+<div class="wrapper">
+  <br>
+  <%= link_to "リスト一覧へ戻る", lists_path %>　　　
+  <%= "タグ検索" %>　　　
+  <%= link_to "ユーザー一覧", users_path %>
+  <br><br><br>
+
+  <h2>キーワード検索</h2>
+  <%= form_with url: search_path, method: :get, local: true do |f| %>
+    <div class="field">
+      <%= f.label :word, "検索ワード" %><br>
+      <%= f.text_field :word, size: "50x1", value: params[:word], autofocus: true %>
+      <br><br><br>
+    </div>
+
+    <div class="field">
+      <%= f.radio_button :condition, :AND, checked: params[:condition] == "AND" || params[:condition] == nil %>
+      <%= f.label :condition_and, "AND 検索　(スペースで区切った複数ワードを全て含む)" %>　　
+      <br><br>
+      <%= f.radio_button :condition, :OR, checked: params[:condition] == "OR" %>
+      <%= f.label :condition_or, "OR 検索　(スペースで区切った複数ワードのいずれかを含む)" %>
+      <br><br><br>
+    </div>
+
+    <div class="field">
+      <%= f.radio_button :model, :List, checked: params[:model] == "List" || params[:model] == nil %>
+      <%= f.label :model_list, "リスト検索　(ワードがリスト or アイテム or タグに含まれるリストを表示)" %>　　
+      <br><br>
+      <%= f.radio_button :model, :Item, checked: params[:model] == "Item" %>
+      <%= f.label :model_item, "アイテム検索　(ワードがアイテム or タグに含まれるアイテムを表示)" %>
+      <br><br>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "送信" %>
+      <br><br><br>
+    </div>
+  <% end %>
+
+  <% if @lists.present? %>
+    <h2>キーワードを含むリスト一覧</h2>
+    <%= "検索件数：#{@lists.count}　　　※列の見出しをクリックして並び替え" %>
+    <br><br>
+
+    <table>
+      <table border="1" width="1200">
+      <thead>
+        <tr>
+          <th width="20%"><%= sort_link(@q, :title, "リストタイトル") %></th>
+          <th width="50%">コンセプト</th>
+          <th width="15%"><%= sort_link(@q, :user_user_name, "作者名") %></th>
+          <th width="15%"><%= sort_link(@q, :updated_at, "リスト更新日時") %></th>
+        </tr>
+      </thead>
+
+      <%# style.css(.td_nowrap) ：tableのセル内に1行で収まらないテキストを、折り返さず省略する。 %>
+      <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
+      <tbody>
+        <% @lists.each do |list| %>
+          <tr>
+            <td class="td_nowrap"><%= link_to "#{list.title}", list_path(list.id) %></td>
+            <td class="td_nowrap"><%= list.concept %></td>
+            <td class="td_nowrap"><%= link_to "#{list.user.user_name}", user_path(list.user_id) %></td>
+            <td class="td_nowrap"><%= list.updated_at.to_s(:datetime_jp) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <br><br>
+  <% end %>
+
+  <% if @items.present? %>
+    <h2>キーワードを含むアイテム一覧</h2>
+    <p>※画像を原寸大サイズで表示：画像を右クリック→新しいタブで画像を開く</p>
+    <%= "検索件数：#{@items.count}" %>　　　
+    <%= sort_link(@q, :item_name, "並び替え（アイテム名）") %>　　　
+    <%= sort_link(@q, :updated_at, "並び替え（アイテム更新日時）") %>
+    <br><br>
+
+    <%# ※外側の table(id="table_items") ：trタグ1つ(1行)につき、アイテムを1つ表示。
+    ※内側の table(id="table_each_item") ：アイテム1つにつき、2行の表を表示。
+    → sort_link ：クリックするたび、2行ずつの表(アイテム1つずつ)を丸ごと並び替えられる。 %>
+    <table id="table_items">
+      <tbody>
+        <% @items.each do |item| %>
+          <tr>
+
+            <table border="3" width="1000" height="120" id="table_each_item">
+              <tbody>
+                <tr>
+                  <td width="25%">
+                    　<font size="1"><%= item.updated_at.to_s(:datetime_jp) %></font>
+                    <br><br>
+                    <font size="1"><%= link_to "#{item.list.title}", list_path(item.list_id) %></font>
+                    <br><br>
+                    <b><%= item.item_name %></b>
+                  </td>
+
+                  <td width="50%" colspan="2"><%= safe_linebreak(item.description) %></td>
+
+                  <td width="25%">
+                    <% if item.images.attached? %>
+                      <% item.images.each do |image| %>
+                        <%= image_tag image, width: 50 %>
+                      <% end %>
+                    <% end %>
+                  </td>
+                </tr>
+
+                <tr height="25">
+                  <% 4.times do |i| %>
+                    <td width="25%">
+                      <%= item.tags[i]&.tag_name %>
+                      <%= "：#{item.item_tags[i].score}" if item.item_tags[i]&.score %>
+                    </td>
+                  <% end %>
+                </tr>
+              </tbody>
+            </table>
+
+          </tr>
+        <% end %>
+      </tbody>
+    <table>
+  <% end %>
+</div>

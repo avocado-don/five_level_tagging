@@ -1,9 +1,10 @@
 <div class="wrapper">
+  <h1>Five Level Tagging　(5段階タグ付けアプリ)</h1>
   <br>
-  <%= "ワード検索" %>　　　
+  <%= link_to "キーワード検索", search_path %>　　　
   <%= "タグ検索" %>　　　
   <%= link_to "ユーザー一覧", users_path %>
-  <br><br>
+  <br><br><br>
 
   <h2>全ユーザーが投稿したリスト一覧</h2>
   <%= "投稿総数：#{@lists.count}　　　※列の見出しをクリックして並び替え" %>　　　

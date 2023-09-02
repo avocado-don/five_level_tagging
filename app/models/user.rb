@@ -25,6 +25,18 @@ class User < ApplicationRecord
   validates :contact, length: { maximum: 100 }
   validates :profile, length: { maximum: 200 }
 
+  def self.ransackable_attributes(auth_object = nil)
+    []
+  end
+
+  def self.ransortable_attributes(auth_object = nil)
+    ["user_name"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["lists", "latest_list"]
+  end
+
   # app/controllers/users/registrations_controller.rb (def update_resource)
   # ：現在のパスワードを入力せずに(入力欄が空欄のままで)、ユーザー情報更新。別のパスワードを入力すると、パスワード変更。
   def update_without_current_password(params, *options)
