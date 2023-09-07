@@ -16,7 +16,7 @@ class ItemForm
 
   def save
     item = Item.create(item_name: item_name, description: description, list_id: list_id, images: images)
-    item.list.update_attributes(updated_at: item.updated_at)
+    item.list.update(updated_at: item.updated_at)
 
     tag_names.each_with_index do |tag_name, i|
       if tag_name.present?
@@ -36,7 +36,7 @@ class ItemForm
     tag_names = params.delete(:tag_names)
     scores = params.delete(:scores)
     item.update(params)
-    item.list.update_attributes(updated_at: item.updated_at)
+    item.list.update(updated_at: item.updated_at)
 
     tag_names.each_with_index do |tag_name, i|
       if tag_name.present?

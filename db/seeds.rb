@@ -6,7 +6,7 @@ end
 
 users = User.order("id DESC").to_a
 users.each_with_index do |user, i|
-  user.update_attributes(created_at: (i+1).month.ago, updated_at: (i+1).month.ago)
+  user.update(created_at: (i+1).month.ago, updated_at: (i+1).month.ago)
 end
 
 CSV.foreach('db/seeds/csv/lists.csv', headers: true) do |row|
@@ -16,7 +16,7 @@ end
 # seedで作成したサンプルデータ群は、更新日時の時差が1000分の1秒単位になる。その時差を拡大して上書き。→ブラウザ上で更新日時を表示・ソートする際、時差が分かりやすく見える。
 lists = List.order("id DESC").to_a
 lists.each_with_index do |list, i|
-  list.update_attributes(created_at: (i+1).days.ago, updated_at: (i+1).days.ago)
+  list.update(created_at: (i+1).days.ago, updated_at: (i+1).days.ago)
 end
 
 CSV.foreach('db/seeds/csv/items.csv', headers: true) do |row|
@@ -28,7 +28,7 @@ end
 
 items = Item.order("id DESC").to_a
 items.each_with_index do |item, i|
-  item.update_attributes(created_at: (i+1).hour.ago, updated_at: (i+1).hour.ago)
+  item.update(created_at: (i+1).hour.ago, updated_at: (i+1).hour.ago)
 end
 
 CSV.foreach('db/seeds/csv/tags.csv', headers: true) do |row|
@@ -37,7 +37,7 @@ end
 
 tags = Tag.order("id DESC").to_a
 tags.each_with_index do |tag, i|
-  tag.update_attributes(created_at: (i+1).hour.ago, updated_at: (i+1).hour.ago)
+  tag.update(created_at: (i+1).hour.ago, updated_at: (i+1).hour.ago)
 end
 
 CSV.foreach('db/seeds/csv/item_tags.csv', headers: true) do |row|
