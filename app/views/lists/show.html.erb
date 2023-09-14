@@ -29,10 +29,8 @@
     <%= link_to "アイテム新規投稿", new_list_item_path(list_id: @list.id) %>　　　
   <% end %>
 
-  <% if @items.exists? %>
-    <%= sort_link(@q, :item_name, "並び替え（アイテム名）") %>　　　
-    <%= sort_link(@q, :updated_at, "並び替え（アイテム更新日時）") %>
-  <% end %>
+  <%= sort_link(@q, :item_name, "並び替え（アイテム名）") %>　　　
+  <%= sort_link(@q, :updated_at, "並び替え（アイテム更新日時）") %>
   <br><br>
 
   <%# ※外側の table(id="table_items") ：trタグ1つ(1行)につき、アイテムを1つ表示。
@@ -70,7 +68,7 @@
               <tr height="25">
                 <% 4.times do |i| %>
                   <td width="25%">
-                    <%= item.tags[i]&.tag_name %>
+                    <%= link_to "#{item.tags[i].tag_name}", tag_path(item.tags[i].id, list_id: item.list_id) if item.tags[i] %>
                     <%= "：#{item.item_tags[i].score}" if item.item_tags[i]&.score %>
                   </td>
                 <% end %>

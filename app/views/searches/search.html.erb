@@ -110,7 +110,7 @@
                 <tr height="25">
                   <% 4.times do |i| %>
                     <td width="25%">
-                      <%= item.tags[i]&.tag_name %>
+                      <%= link_to "#{item.tags[i].tag_name}", tag_path(item.tags[i].id) if item.tags[i] %>
                       <%= "：#{item.item_tags[i].score}" if item.item_tags[i]&.score %>
                     </td>
                   <% end %>

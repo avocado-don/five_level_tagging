@@ -25,4 +25,8 @@ class Item < ApplicationRecord
       "%#{keyword}%", "%#{keyword}%", "%#{keyword}%"
     )
   end
+
+  # tags/show.html.erb (sort_link(@q, :item_tag_score, "並び替え（タグスコア）")) ：1つのタグに紐づくスコアで、アイテムを並び替え。
+  scope :sort_by_item_tag_score_asc, -> { order("item_tags.score ASC") }
+  scope :sort_by_item_tag_score_desc, -> { order("item_tags.score DESC") }
 end
