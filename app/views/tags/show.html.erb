@@ -1,9 +1,9 @@
 <div class="wrapper">
   <br>
+  <%= link_to "タグ検索トップへ戻る", tags_path %>　　　
   <%= link_to "キーワード検索", search_path %>　　　
-  <%= "タグ検索" %>　　　
   <%= link_to "ユーザー一覧", users_path %>
-  <br><br><br>
+  <br><br>
 
   <h2><%= "タグ検索：#{@tag.tag_name}" %></h2>
 
@@ -39,6 +39,10 @@
               <tr>
                 <td width="25%">
                   　<font size="1"><%= item.updated_at.to_s(:datetime_jp) %></font>
+                  <% if user_signed_in? && current_user.id == item.list.user_id %>
+                    　<%= link_to "編集", edit_list_item_path(list_id: item.list_id, id: item.id) %>
+                    　<%= link_to "削除", list_item_path(list_id: item.list_id, id: item.id), method: :delete, data: { confirm: "このアイテムを削除してもよろしいですか？" } %>
+                  <% end %>
                   <br><br>
                   <font size="1"><%= link_to "#{item.list.title}", list_path(item.list_id) %></font>
                   <br><br>

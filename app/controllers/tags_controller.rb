@@ -1,7 +1,22 @@
 class TagsController < ApplicationController
+
+  # tag.rb (has_one :latest_item_tag) ：タグを含むアイテムの最新更新日時1件ずつを取得する(N+1を回避)。
+  def index
+    if search_params[:word].present? && search_params[:word] != ""
+      params[:model] = "Tag"
+      params[:condition] = "OR"
+      branch_of_search(search_params)
+    else
+      @q = Tag.distinct.ransack(params[:q])
+    end
+    @q.sorts = "latest_item_tag_updated_at DESC" if @q.sorts.empty?
+    @tags = @q.result
+    @tag_groups = @tags.each_slice(4)
+  end
+
   def show
     @tag = Tag.find(params[:id])
-    if params[:list_id] != ""
+    if params[:list_id].present? && params[:list_id] != ""
       @q = @tag.items.where(list_id: params[:list_id]).ransack(params[:q])
     else
       @q = @tag.items.ransack(params[:q])

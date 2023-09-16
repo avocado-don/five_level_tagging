@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :lists do
     resources :items, except: [:index, :show]
   end
-  resources :tags, only: [:show]
+  resources :tags, only: [:index, :show]
   resources :users, only: [:index, :show]
   get :search, to: "searches#search"
 end

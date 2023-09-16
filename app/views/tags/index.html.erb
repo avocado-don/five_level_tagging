@@ -1,0 +1,39 @@
+<div class="wrapper">
+  <br>
+  <%= link_to "リスト一覧へ戻る", lists_path %>　　　
+  <%= link_to "キーワード検索", search_path %>　　　
+  <%= link_to "ユーザー一覧", users_path %>
+  <br><br>
+
+  <h2>タグ検索</h2>
+  <%= form_with url: tags_path, method: :get, local: true do |f| %>
+    <div class="field">
+      <%= f.label :word, "検索ワード：OR 検索　(スペースで区切った複数ワードのいずれかを含む)" %><br>
+      <%= f.text_field :word, size: "50x1", value: params[:word], autofocus: true %>　　
+      <%= f.submit "送信" %>
+      <br><br><br>
+    </div>
+  <% end %>
+
+  <h4>●タグ一覧</h4>
+  <p>※表の見方：1段目が1〜4番目、2段目が5〜8番目…</p>
+  <%= "検索件数：#{@tags.count}" %>　　　
+  <%= sort_link(@q, :tag_name, "並び替え（タグ名）") %>　　　
+  <%= sort_link(@q, :latest_item_tag_updated_at, "並び替え（タグを含むアイテムの最新更新日時）") %>
+  <br><br>
+
+  <table>
+    <table border="1" width="1000">
+    <tbody>
+      <% @tag_groups.each do |group| %>
+        <tr height="25">
+          <% group.each do |tag| %>
+            <td width="25%">
+              <%= link_to tag.tag_name, tag_path(tag.id) %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
