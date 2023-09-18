@@ -1,5 +1,6 @@
 class TagsController < ApplicationController
 
+  # application_controller.rb (def branch_of_search) ：List, Item, Tagモデルのキーワード検索。params[:model]の値により条件分岐。
   # tag.rb (has_one :latest_item_tag) ：タグを含むアイテムの最新更新日時1件ずつを取得する(N+1を回避)。
   def index
     if search_params[:word].present? && search_params[:word] != ""

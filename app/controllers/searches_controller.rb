@@ -1,12 +1,15 @@
 class SearchesController < ApplicationController
-  def search
-    branch_of_search(search_params) if search_params[:word].present? && search_params[:word] != ""
 
-    @q.sorts = "updated_at DESC" if @q.sorts.empty?
-    if search_params[:model] == "List"
-      @lists = @q.result.preload(:user)
-    elsif search_params[:model] == "Item"
-      @items = @q.result.preload(:list, :tags)
+  # application_controller.rb (def branch_of_search) ：List, Item, Tagモデルのキーワード検索。params[:model]の値により条件分岐。
+  def search
+    if search_params[:word].present? && search_params[:word] != ""
+      branch_of_search(search_params)
+      @q.sorts = "updated_at DESC" if @q.sorts.empty?
+      if search_params[:model] == "List"
+        @lists = @q.result.preload(:user)
+      elsif search_params[:model] == "Item"
+        @items = @q.result.preload(:list, :tags)
+      end
     end
   end
 end
