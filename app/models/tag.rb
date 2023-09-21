@@ -32,6 +32,6 @@ class Tag < ApplicationRecord
 
   # application_controller.rb (def branch_of_search) ：List, Item, Tagモデルのキーワード検索。params[:model]の値により条件分岐。
   def self.search_records(keyword)
-    where("tags.tag_name LIKE?", "%#{keyword}%")
+    where("tag_name LIKE?", "%#{keyword}%")
   end
 end

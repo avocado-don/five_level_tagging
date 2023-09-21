@@ -33,3 +33,12 @@ header {
   text-overflow: ellipsis;
   max-width: 0;
 }
+
+.incremental_search_tags{
+  border: 1px solid;
+  border-radius: 2px;
+  background-color: #F4F4F4;
+  padding: 4px;
+  margin: 2px;
+  line-height: 30px;
+}

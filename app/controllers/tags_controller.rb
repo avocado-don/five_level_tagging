@@ -25,4 +25,10 @@ class TagsController < ApplicationController
     @q.sorts = "updated_at DESC" if @q.sorts.empty?
     @items = @q.result.distinct.includes(:list, :tags)
   end
+
+  def search
+    return nil if params[:keyword] == ""
+    tag = Tag.search_records(params[:keyword])
+    render json:{ keyword: tag }
+  end
 end

@@ -23,8 +23,9 @@
   <% 4.times do |i| %>
     <div class="field">
       <%= f.label :tag_name, "タグ名(#{i+1}) [任意]" %>
-      <%= f.text_field :tag_name, name: "item_form[tag_names][]", value: @item_form.tag_names[i], maxlength: "25", placeholder: "25文字以内", size: "50x1" %>
-      <br><br>
+      <%= f.text_field :tag_name, name: "item_form[tag_names][]", id: "item_form_tag_name_#{i+1}", value: @item_form.tag_names[i], maxlength: "25", placeholder: "25文字以内", size: "50x1" %>
+      <div id=<%= "search_results_#{i+1}" %>></div>
+      <br>
     </div>
 
     <div class="field">
