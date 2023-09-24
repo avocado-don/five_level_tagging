@@ -17,8 +17,8 @@ class TagsController < ApplicationController
 
   def show
     @tag = Tag.find(params[:id])
-    if params[:list_id].present? && params[:list_id] != ""
-      @q = @tag.items.where(list_id: params[:list_id]).ransack(params[:q])
+    if list_tag_params[:list_id].present? && list_tag_params[:list_id] != ""
+      @q = @tag.items.where(list_id: list_tag_params[:list_id]).ransack(params[:q])
     else
       @q = @tag.items.ransack(params[:q])
     end
@@ -27,8 +27,17 @@ class TagsController < ApplicationController
   end
 
   def search
-    return nil if params[:keyword] == ""
-    tag = Tag.search_records(params[:keyword])
+    return nil if incremental_search_params[:keyword] == ""
+    tag = Tag.search_records(incremental_search_params[:keyword]).order("tag_name ASC")
     render json:{ keyword: tag }
+  end
+
+  private
+  def list_tag_params
+    params.permit(:list_id, :commit, :id, [q: :s])
+  end
+
+  def incremental_search_params
+    params.permit(:keyword)
   end
 end
