@@ -20,7 +20,7 @@ lists.each_with_index do |list, i|
 end
 
 CSV.foreach('db/seeds/csv/items.csv', headers: true) do |row|
-  item = Item.create!(list_id: row['list_id'], item_name: row['item_name'], description: row['description'])
+  item = Item.create!(list_id: row['list_id'], item_name: row['item_name'], description: row['description'], row_order: row['row_order'])
   4.times do |i|
     item.images.attach(io: File.open(Rails.root.join("db/seeds/images/#{row["image#{i+1}"]}")), filename: row["image#{i+1}"].to_s) if row["image#{i+1}"].present?
   end

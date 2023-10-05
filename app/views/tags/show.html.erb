@@ -26,53 +26,47 @@
   <%= sort_link(@q, :item_tag_score, "並び替え（タグスコア）") %>
   <br><br>
 
-  <%# ※外側の table(id="table_items") ：trタグ1つ(1行)につき、アイテムを1つ表示。
-  ※内側の table(id="table_each_item") ：アイテム1つにつき、2行の表を表示。
+  <%# ※外側の div(class="table_items") ：tableタグ1つにつき、アイテムを1つ表示。
+  ※内側の table(class="table_each_item") ：アイテム1つにつき、2行の表を表示。
   → sort_link ：クリックするたび、2行ずつの表(アイテム1つずつ)を丸ごと並び替えられる。 %>
-  <table id="table_items">
-    <tbody>
-      <% @items.each do |item| %>
-        <tr>
+  <div class="table_items">
+    <% @items.each do |item| %>
+      <table border="3" width="1000" height="120" class="table_each_item">
+        <tbody>
+          <tr>
+            <td width="25%">
+              　<font size="1"><%= item.updated_at.to_s(:datetime_jp) %></font>
+              <% if user_signed_in? && current_user.id == item.list.user_id %>
+                　<%= link_to "編集", edit_list_item_path(list_id: item.list_id, id: item.id) %>
+                　<%= link_to "削除", list_item_path(list_id: item.list_id, id: item.id), method: :delete, data: { confirm: "このアイテムを削除してもよろしいですか？" } %>
+              <% end %>
+              <br><br>
+              <font size="1"><%= link_to "#{item.list.title}", list_path(item.list_id) %></font>
+              <br><br>
+              <b><%= item.item_name %></b>
+            </td>
 
-          <table border="3" width="1000" height="120" id="table_each_item">
-            <tbody>
-              <tr>
-                <td width="25%">
-                  　<font size="1"><%= item.updated_at.to_s(:datetime_jp) %></font>
-                  <% if user_signed_in? && current_user.id == item.list.user_id %>
-                    　<%= link_to "編集", edit_list_item_path(list_id: item.list_id, id: item.id) %>
-                    　<%= link_to "削除", list_item_path(list_id: item.list_id, id: item.id), method: :delete, data: { confirm: "このアイテムを削除してもよろしいですか？" } %>
-                  <% end %>
-                  <br><br>
-                  <font size="1"><%= link_to "#{item.list.title}", list_path(item.list_id) %></font>
-                  <br><br>
-                  <b><%= item.item_name %></b>
-                </td>
+            <td width="50%" colspan="2"><%= safe_linebreak(item.description) %></td>
 
-                <td width="50%" colspan="2"><%= safe_linebreak(item.description) %></td>
-
-                <td width="25%">
-                  <% if item.images.attached? %>
-                    <% item.images.each do |image| %>
-                      <%= image_tag image, width: 50 %>
-                    <% end %>
-                  <% end %>
-                </td>
-              </tr>
-
-              <tr height="25">
-                <% 4.times do |i| %>
-                  <td width="25%">
-                    <%= link_to "#{item.tags[i].tag_name}", tag_path(item.tags[i].id) if item.tags[i] %>
-                    <%= "：#{item.item_tags[i].score}" if item.item_tags[i]&.score %>
-                  </td>
+            <td width="25%">
+              <% if item.images.attached? %>
+                <% item.images.each do |image| %>
+                  <%= image_tag image, width: 50 %>
                 <% end %>
-              </tr>
-            </tbody>
-          </table>
+              <% end %>
+            </td>
+          </tr>
 
-        </tr>
-      <% end %>
-    </tbody>
-  <table>
+          <tr height="25">
+            <% 4.times do |i| %>
+              <td width="25%">
+                <%= link_to "#{item.tags[i].tag_name}", tag_path(item.tags[i].id) if item.tags[i] %>
+                <%= "：#{item.item_tags[i].score}" if item.item_tags[i]&.score %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
 </div>

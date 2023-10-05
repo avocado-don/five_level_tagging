@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: "users/registrations" }
   root to: "lists#index"
   resources :lists do
-    resources :items, except: [:index, :show]
+    resources :items, except: [:index, :show] do
+      put :sort, on: :member
+    end
   end
   resources :tags, only: [:index, :show] do
     get :search, on: :collection

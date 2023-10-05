@@ -23,7 +23,7 @@ class ListsController < ApplicationController
 
   def show
     @q = @list.items.ransack(params[:q])
-    @q.sorts = "updated_at DESC" if @q.sorts.empty?
+    @q.sorts = "row_order ASC" if @q.sorts.empty?
     @items = @q.result.includes(:tags)
   end
 

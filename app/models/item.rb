@@ -6,12 +6,15 @@ class Item < ApplicationRecord
   has_many :item_tags, dependent: :destroy
   has_many :tags, through: :item_tags
 
+  include RankedModel
+  ranks :row_order, with_same: :list_id
+
   def self.ransackable_attributes(auth_object = nil)
     []
   end
 
   def self.ransortable_attributes(auth_object = nil)
-    ["item_name", "updated_at"]
+    ["item_name", "updated_at", "row_order"]
   end
 
   def self.ransackable_associations(auth_object = nil)
