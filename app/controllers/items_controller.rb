@@ -44,7 +44,8 @@ class ItemsController < ApplicationController
 
   def sort
     if current_user.id == @list.user_id
-      @item.update(sort_params)
+      @item.assign_attributes(sort_params)
+      @item.save(touch: false)
       2.times { renumber_row_order(@list) }
     end
   end
@@ -59,7 +60,12 @@ class ItemsController < ApplicationController
   end
 
   def renumber_row_order(list)
-    list.items.rank(:row_order).each_with_index { |item, i| item.update(row_order: i+1)}
+    List.no_touching do
+      list.items.rank(:row_order).each_with_index do |item, i|
+        item.assign_attributes(row_order: i+1)
+        item.save(touch: false)
+      end
+    end
   end
 
   def set_list

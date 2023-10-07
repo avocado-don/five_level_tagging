@@ -3,7 +3,7 @@ class ItemForm
 
   attr_accessor(
     :id, :created_at, :updated_at,
-    :item_name, :description, :list_id,
+    :item_name, :description, :row_order, :list_id,
     :images,
     :tag_names, :tag_name,
     :scores, :score, :item_id, :tag_id
@@ -16,7 +16,6 @@ class ItemForm
 
   def save
     item = Item.create(item_name: item_name, description: description, list_id: list_id, images: images)
-    item.list.update(updated_at: item.updated_at)
 
     tag_names.each_with_index do |tag_name, i|
       if tag_name.present?
@@ -36,7 +35,6 @@ class ItemForm
     tag_names = params.delete(:tag_names)
     scores = params.delete(:scores)
     item.update(params)
-    item.list.update(updated_at: item.updated_at)
 
     tag_names.each_with_index do |tag_name, i|
       if tag_name.present?
