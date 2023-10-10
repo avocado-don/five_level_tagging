@@ -19,16 +19,18 @@ lists.each_with_index do |list, i|
   list.update(created_at: (i+1).days.ago, updated_at: (i+1).days.ago)
 end
 
-CSV.foreach('db/seeds/csv/items.csv', headers: true) do |row|
-  item = Item.create!(list_id: row['list_id'], item_name: row['item_name'], description: row['description'], row_order: row['row_order'])
-  4.times do |i|
-    item.images.attach(io: File.open(Rails.root.join("db/seeds/images/#{row["image#{i+1}"]}")), filename: row["image#{i+1}"].to_s) if row["image#{i+1}"].present?
+List.no_touching do
+  CSV.foreach('db/seeds/csv/items.csv', headers: true) do |row|
+    item = Item.create!(list_id: row['list_id'], item_name: row['item_name'], description: row['description'], row_order: row['row_order'])
+    4.times do |i|
+      item.images.attach(io: File.open(Rails.root.join("db/seeds/images/#{row["image#{i+1}"]}")), filename: row["image#{i+1}"].to_s) if row["image#{i+1}"].present?
+    end
   end
-end
 
-items = Item.order("id DESC").to_a
-items.each_with_index do |item, i|
-  item.update(created_at: (i+1).hour.ago, updated_at: (i+1).hour.ago)
+  items = Item.order("id DESC").to_a
+  items.each_with_index do |item, i|
+    item.update(created_at: (i+1).hour.ago, updated_at: (i+1).hour.ago)
+  end
 end
 
 CSV.foreach('db/seeds/csv/tags.csv', headers: true) do |row|
@@ -40,6 +42,8 @@ tags.each_with_index do |tag, i|
   tag.update(created_at: (i+1).hour.ago, updated_at: (i+1).hour.ago)
 end
 
-CSV.foreach('db/seeds/csv/item_tags.csv', headers: true) do |row|
-  ItemTag.create!(item_id: row['item_id'], tag_id: row['tag_id'], score: row['score'])
+Item.no_touching do
+  CSV.foreach('db/seeds/csv/item_tags.csv', headers: true) do |row|
+    ItemTag.create!(item_id: row['item_id'], tag_id: row['tag_id'], score: row['score'])
+  end
 end

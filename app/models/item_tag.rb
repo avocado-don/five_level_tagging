@@ -1,5 +1,5 @@
 class ItemTag < ApplicationRecord
-  belongs_to :item
+  belongs_to :item, touch: true
   belongs_to :tag
 
   def self.ransackable_attributes(auth_object = nil)

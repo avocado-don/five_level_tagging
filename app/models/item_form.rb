@@ -16,35 +16,32 @@ class ItemForm
 
   def save
     item = Item.create(item_name: item_name, description: description, list_id: list_id, images: images)
-
-    tag_names.each_with_index do |tag_name, i|
-      if tag_name.present?
-        tag = Tag.where(tag_name: tag_name).first_or_initialize
-        tag.save
-        if scores[i].present?
+    4.times do |i|
+      if tag_names[i].present?
+        tag = Tag.where(tag_name: tag_names[i]).first_or_create
+        Item.no_touching do
           ItemTag.create(item_id: item.id, tag_id: tag.id, score: scores[i])
-        else
-          ItemTag.create(item_id: item.id, tag_id: tag.id)
         end
       end
     end
   end
 
   def update(params, item)
-    item.item_tags.destroy_all
+    item_tags = item.item_tags
     tag_names = params.delete(:tag_names)
     scores = params.delete(:scores)
     item.update(params)
 
-    tag_names.each_with_index do |tag_name, i|
-      if tag_name.present?
-        tag = Tag.where(tag_name: tag_name).first_or_initialize
-        tag.save
-        if scores[i].present?
-          ItemTag.create(item_id: item.id, tag_id: tag.id, score: scores[i])
+    4.times do |i|
+      if tag_names[i].present?
+        tag = Tag.where(tag_name: tag_names[i]).first_or_create
+        if item_tags[i].present?
+          item_tags[i].update(item_id: item.id, tag_id: tag.id, score: scores[i])
         else
-          ItemTag.create(item_id: item.id, tag_id: tag.id)
+          ItemTag.create(item_id: item.id, tag_id: tag.id, score: scores[i])
         end
+      elsif item_tags[i].present?
+        item_tags[i].destroy
       end
     end
   end
