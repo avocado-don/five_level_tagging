@@ -1,11 +1,9 @@
 <div class="wrapper">
-  <br>
-  <%= link_to "ユーザー一覧へ戻る", users_path %>
   <% if user_signed_in? && current_user.id == @user.id %>
-    　　　<%= link_to "ユーザーアカウント編集", edit_user_registration_path %>
-    　　　<%= link_to "ユーザーアカウント削除", user_registration_path, method: :delete, data: { confirm: "ユーザーアカウントを削除してもよろしいですか？\n投稿したリスト・アイテム・スコアも全て削除されます。" } %>
-  <% end %>
+    <%= link_to "ユーザーアカウント編集", edit_user_registration_path %>　　　
+    <%= link_to "ユーザーアカウント削除", user_registration_path, method: :delete, data: { confirm: "ユーザーアカウントを削除してもよろしいですか？\n投稿したリスト・アイテム・スコアも全て削除されます。" } %>
   <br><br>
+  <% end %>
 
   <h2><%= "ユーザー詳細：#{@user.user_name}" %></h2>
   <br>

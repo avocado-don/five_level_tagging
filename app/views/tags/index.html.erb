@@ -1,10 +1,4 @@
 <div class="wrapper">
-  <br>
-  <%= link_to "リスト一覧へ戻る", lists_path %>　　　
-  <%= link_to "キーワード検索", search_path %>　　　
-  <%= link_to "ユーザー一覧", users_path %>
-  <br><br>
-
   <h2>タグ検索</h2>
   <%= form_with url: tags_path, method: :get, local: true do |f| %>
     <div class="field">

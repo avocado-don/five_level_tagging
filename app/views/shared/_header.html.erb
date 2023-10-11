@@ -1,10 +1,13 @@
 <header>
-  <b><i><%= link_to "Five Level Tagging", root_path %></i></b>　　　
+  <%= link_to "リスト一覧", lists_path %>　　　
+  <%= link_to "キーワード検索", search_path %>　　　
+  <%= link_to "タグ検索", tags_path %>　　　
+  <%= link_to "ユーザー一覧", users_path %>　　　
   <% if user_signed_in? %>
-    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>　　　
-    <%= link_to "#{current_user.user_name}", user_path(current_user.id) %>
+    <%= link_to "マイページ", user_path(current_user.id) %>　　　
+    <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
   <% else %>
-    <%= link_to "ログイン", new_user_session_path %>　　　
-    <%= link_to "ユーザー登録", new_user_registration_path %>
+    <%= link_to "ユーザー登録", new_user_registration_path %>　　　
+    <%= link_to "ログイン", new_user_session_path %>
   <% end %>
 </header>
