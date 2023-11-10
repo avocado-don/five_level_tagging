@@ -6,7 +6,7 @@ class TagsController < ApplicationController
     if search_params[:word].present? && search_params[:word] != ""
       params[:model] = "Tag"
       params[:condition] = "OR"
-      branch_of_search(search_params)
+      keyword_search(search_params)
     else
       @q = Tag.distinct.ransack(params[:q])
     end

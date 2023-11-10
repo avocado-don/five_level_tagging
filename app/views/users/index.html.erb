@@ -1,28 +1,35 @@
-<div class="wrapper">
-  <h2>リストを投稿したユーザー一覧</h2>
-  <%= "ユーザー総数：#{@users.count}　　　※列の見出しをクリックして並び替え" %>
-  <br><br>
+<div class="section users_heading_section">
+  <h2>ユーザー一覧</h2>
+</div>
 
-  <table>
-    <table border="1" width="1200">
+<div class="section users_section">
+  <h4>●リストを投稿したユーザー一覧</h4>
+  <div class="link_bar">
+    <%= "ユーザー総数：#{@users.count}" %>
+    <span class="note">※列の見出しリンクをクリックして並び替え。</span>
+  </div>
+
+  <table class="user_table">
     <thead>
       <tr>
-        <th width="20%"><%= sort_link(@q, :user_name, "ユーザー名") %></th>
-        <th width="50%">自己紹介</th>
-        <th width="15%"><%= sort_link(@q, :latest_list_title, "最新リストタイトル") %></th>
-        <th width="15%"><%= sort_link(@q, :latest_list_updated_at, "最新リスト更新日時") %></th>
+        <th class="user_name_th"><%= sort_link(@q, :user_name, "ユーザー名") %></th>
+        <th class="user_profile_th">自己紹介<span class="note"> （表示しきれない場合はスクロール可）</span></th>
+        <th class="list_title_th"><%= sort_link(@q, :latest_list_title, "最新リストタイトル") %></th>
+        <th class="list_updatedAt_th"><%= sort_link(@q, :latest_list_updated_at, "リスト更新日時") %></th>
       </tr>
     </thead>
 
-    <%# style.css(.td_nowrap) ：tableのセル内に1行で収まらないテキストを、折り返さず省略する。 %>
+    <%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
     <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
     <tbody>
-      <% @users.each do |user| %>
-        <tr>
-          <td class="td_nowrap"><%= link_to "#{user.user_name}", user_path(user.id) %></td>
-          <td class="td_nowrap"><%= user.profile %></td>
-          <td class="td_nowrap"><%= link_to "#{user.latest_list.title}", list_path(user.latest_list.id) %></td>
-          <td class="td_nowrap"><%= user.latest_list.updated_at.to_s(:datetime_jp) %></td>
+      <% @users.each_with_index do |user, i| %>
+        <tr id=<%= "user_tr#{i+1}_id#{user.id}" %>>
+          <td class="user_name_td"><%= link_to user.user_name, user_path(user.id) %></td>
+          <td class="user_profile_td">
+            <div class="user_td_scroll"><%= safe_linebreak(user.profile) %></div>
+          </td>
+          <td class="list_title_td"><%= link_to user.latest_list.title, list_path(user.latest_list.id) %></td>
+          <td class="list_updated_at_td"><%= user.latest_list.updated_at.to_s(:datetime_jp) %></td>
         </tr>
       <% end %>
     </tbody>

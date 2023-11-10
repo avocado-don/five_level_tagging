@@ -1,37 +1,40 @@
-<%= form_with model: @item_form, url: url, method: method, local: true do |f| %>
-  <div class="field">
-    <%= f.label :item_name, "アイテム名 [必須]" %><br>
-    <%= f.text_field :item_name, size: "50x1", autofocus: true %>
-    <br><br>
+<%= form_with model: @item_form, url: url, method: method, local: true, id: "js_item_form" do |f| %>
+  <div class="field item_name_field">
+    <%= f.label :item_name, "●アイテム名 ［必須］" %>
+    <%= f.text_field :item_name, autofocus: true %>
   </div>
 
-  <div class="field">
-    <%= f.label :description, "説明 [任意]" %><br>
-    <%= f.text_area :description, size: "50x5" %>
-    <br><br>
+  <div class="field description_field">
+    <%= f.label :description, "●説明 ［任意］" %>
+    <%= f.text_area :description %>
   </div>
 
   <%# 画像ファイル選択ボタンを4つ実装(multipleは不使用) ：別ディレクトリから選択可。ファイル名を別個に表示可。 %>
-  <div class="actions">
-    <%= f.label :images, "画像（最大4枚） [任意]" %><br>
-      <% 4.times do %>
-        <%= f.file_field :images, name: "item_form[images][]" %><br>
-      <% end %>
-    <br><br>
+  <div class="field images_field">
+    <%= f.label :images, "●画像（最大4枚） ［任意］" %>
+    <% 4.times do %>
+      <%= f.file_field :images, name: "item_form[images][]" %>
+    <% end %>
   </div>
 
   <% 4.times do |i| %>
-    <div class="field">
-      <%= f.label :tag_name, "タグ名(#{i+1}) [任意]" %>
-      <%= f.text_field :tag_name, name: "item_form[tag_names][]", id: "item_form_tag_name_#{i+1}", value: @item_form.tag_names[i], maxlength: "25", placeholder: "25文字以内", size: "50x1" %>
-      <div id=<%= "search_results_#{i+1}" %>></div>
-      <br>
-    </div>
+    <div class="field tag_name_score_field">
+      <%= f.label :tag_name, "●タグ名(#{i+1}) ［任意］", for: "item_form_tag_name#{i+1}" %>
+      <% if @item.present? %>
+        <%= f.text_field :tag_name, name: "item_form[tag_names][]", value: @item_form.tag_names[i], maxlength: "25", placeholder: "25文字以内", id: "item_form_tag_name#{i+1}" %>
+      <% else %>
+        <%= f.text_field :tag_name, name: "item_form[tag_names][]", maxlength: "25", placeholder: "25文字以内", id: "item_form_tag_name#{i+1}" %>
+      <% end %>
+      <div class="tag_search_results" id=<%= "tag_results_group#{i+1}" %>></div>
 
-    <div class="field">
-      <%= f.label :score, "スコア(#{i+1}) [任意]" %>
-      <%= f.number_field :score, name: "item_form[scores][]", value: @item_form.scores[i], min: 1, max: 5 %>
-      <br><br><br>
+      <div class="score_field">
+        <%= f.label :score, "●スコア(#{i+1}) ［任意］", for: "item_form_score#{i+1}" %>
+        <% if @item.present? %>
+          <%= f.number_field :score, name: "item_form[scores][]", value: @item_form.scores[i], min: 1, max: 5, class: "score_input", id: "item_form_score#{i+1}" %>
+        <% else %>
+          <%= f.number_field :score, name: "item_form[scores][]", min: 1, max: 5, class: "score_input", id: "item_form_score#{i+1}" %>
+        <% end %>
+      </div>
     </div>
   <% end %>
 

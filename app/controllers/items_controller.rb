@@ -5,8 +5,6 @@ class ItemsController < ApplicationController
 
   def new
     @item_form = ItemForm.new
-    @item_form.tag_names = ""
-    @item_form.scores = ""
   end
 
   def create

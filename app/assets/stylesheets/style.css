@@ -1,4 +1,4 @@
-/* ※開発中アプリにつき、ユーザー目線の説明やレイアウト装飾は、一通りの機能実装後に着手する。 */
+/* ※開発中アプリにつき、レイアウト装飾（配色・フォントなど）は、一通りの機能実装後に着手する。 */
 
 * {
   box-sizing: border-box;
@@ -17,30 +17,140 @@ a:hover {
   background-color: #000;
 }
 
-header {
-  background-color: #f1f8fe;
-  margin-bottom: 20px;
-  padding: 20px;
+.global_nav {
+  background-color: #eff;
+  padding: 2px 16px;
 }
 
-.wrapper {
-  margin: 20px;
+.link_bar {
+  margin: 24px 0;
+  display: flex;
+  gap: 48px;
 }
 
-.td_nowrap {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 0;
+.page_wrapper {
+  margin: 32px 16px;
 }
 
-.incremental_search_tags {
-  border: 1px solid;
-  border-radius: 2px;
-  background-color: #F4F4F4;
+.site_title {
+  width: fit-content;
+  border: 4px double;
   padding: 4px;
-  margin: 2px;
-  line-height: 30px;
+  margin-bottom: 48px;
+}
+
+.section {
+  margin-bottom: 64px;
+}
+
+.text {
+  white-space: pre-wrap;
+  overflow: scroll;
+  width: 640px;
+  max-height: 160px;
+  border: 1px solid;
+  padding: 4px;
+}
+
+.text:empty {
+  display: none;
+}
+
+.note {
+  font-weight: normal;
+  font-size: 14px;
+}
+
+/* テーブル */
+table {
+  border: 2px solid;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 2px solid;
+  padding: 4px;
+}
+
+.list_title_th {
+  width: 240px;
+}
+
+.list_updated_at_th {
+  width: 152px;
+}
+
+.list_concept_th, .user_profile_th {
+  width: 600px;
+}
+
+.user_name_th {
+  width: 208px;
+}
+
+.list_td_scroll, .user_td_scroll {
+  white-space: pre-wrap;
+  overflow: scroll;
+  min-height: 40px;
+  max-height: 80px;
+}
+
+.item_td_scroll {
+  white-space: pre-wrap;
+  overflow: scroll;
+  min-height: 90px;
+  max-height: 180px;
+}
+
+.list_updated_at_td {
+  font-size: 15px;
+}
+
+.item_data_td {
+  width: 300px;
+}
+
+.item_updated_at_td {
+  font-size: 4px;
+  margin-left: 16px;
+}
+
+.item_list_td {
+  font-size: 14px;
+  margin-bottom: 16px;
+}
+
+.item_name_td {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.item_description_td {
+  width: 600px;
+}
+
+.item_image_td {
+  width: 300px;
+}
+
+.item_td_grid {
+  display: grid;
+  grid-template-columns: 140px 140px;
+  gap: 2px;
+  justify-content: center;
+  align-items: center;
+}
+
+.item_image {
+  max-width: 140px;
+  max-height: 140px;
+  justify-self: center;
+  align-self: center;
+}
+
+.item_tag_td {
+  width: 300px;
+  height: 30px;
 }
 
 .ui-sortable-handle {
@@ -49,4 +159,75 @@ header {
 
 .ui-sortable-handle:active {
   cursor: grabbing;
+}
+
+/* フォーム */
+.field {
+  margin-bottom: 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field_row {
+  display: flex;
+  gap: 12px;
+}
+
+.score_field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  cursor: pointer;
+  font-weight: bold;
+  width: fit-content;
+}
+
+textarea {
+  width: 488px;
+  height: 96px;
+  resize: none;
+}
+
+[type="text"], [type="email"] {
+  width: 488px;
+}
+
+[type="password"] {
+  width: 144px;
+}
+
+[type="radio"], [type="submit"] {
+  cursor: pointer;
+}
+
+[type="file"] {
+  cursor: pointer;
+  width: fit-content;
+}
+
+.list_id_input {
+  width: 80px;
+}
+
+.score_input {
+  width: 40px;
+}
+
+.tag_search_results {
+  white-space: pre-wrap;
+  width: 488px;
+}
+
+.tag_search_result {
+  cursor: pointer;
+  background-color: #eee;
+  border: 1px solid;
+  border-radius: 2px;
+  padding: 4px;
+  margin: 2px;
+  display: inline-block;
 }

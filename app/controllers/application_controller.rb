@@ -21,7 +21,7 @@ def search_params
 end
 
 # list.rb, item.rb, tag.rb (def self.search_records) ：List, Item, Tagモデルのキーワード検索。params[:model]の値により条件分岐。
-def branch_of_search(search_params)
+def keyword_search(search_params)
   keywords = search_params[:word].squish.split(" ")
   model = search_params[:model].constantize
   records = model.none

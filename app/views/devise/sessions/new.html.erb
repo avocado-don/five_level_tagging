@@ -1,17 +1,17 @@
-<div class="wrapper">
+<div class="section login_heading_section">
   <h2>ログイン</h2>
+</div>
 
+<div class="section login_form_section">
   <%= form_with model: @user, url: user_session_path, local: true do |f| %>
-    <div class="field">
-      <%= f.label :email, "Eメール" %><br>
+    <div class="field email_field">
+      <%= f.label :email, "●Eメール" %>
       <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      <br><br>
     </div>
 
-    <div class="field">
-      <%= f.label :password, "パスワード" %><br>
-      <%= f.password_field :password, autocomplete: "current-password", maxlength: "16", placeholder: "半角英数8~16文字" %>
-      <br><br>
+    <div class="field password_field">
+      <%= f.label :password, "●パスワード" %>
+      <%= f.password_field :password, autocomplete: "current-password", minlength: "8", maxlength: "16", placeholder: "半角英数8~16文字" %>
     </div>
 
     <div class="actions">

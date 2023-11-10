@@ -1,77 +1,42 @@
-<div class="wrapper">
+<div class="section list_heading_section">
   <h2><%= "リスト：#{@list.title}" %></h2>
-  <br>
-
-  <%= "作者名：" %><%= link_to "#{@list.user.user_name}", user_path(@list.user_id) %>
-  <% if user_signed_in? && current_user.id == @list.user_id %>
-    　　　<%= link_to "リスト編集", edit_list_path(@list.id) %>
-    　　　<%= link_to "リスト削除", list_path(@list.id), method: :delete, data: { confirm: "このリストを削除してもよろしいですか？\nリスト内のアイテムも全て削除されます。" } %>
-  <% end %>
-  <br><br>
-
-  <%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
-  <h4>●コンセプト</h4>
-  <p><%= safe_linebreak(@list.concept) %></p>
-  <br>
-
-  <h4>●リスト作成ルール</h4>
-  <p><%= safe_linebreak(@list.rule) %></p>
-  <br>
-
-  <h4>●アイテム（リスト内項目）</h4>
-  <p>※画像を原寸大サイズで表示：画像を右クリック→「新しいタブで画像を開く」をクリック。</p>
-  <p>※指定したタグのスコア順にアイテムを並び替え：タグ名をクリック→「並び替え（タグスコア）」をクリック。</p>
-  <p>※リスト作者のみ、アイテムの順番を自由に指定・保存：「並び替え（作者指定順） ▲」の状態で、各アイテムをドラッグ＆ドロップ。</p>
-  <%= "投稿総数：#{@items.count}" %>　　　
-  <% if user_signed_in? && current_user.id == @list.user_id %>
-    <%= link_to "アイテム新規投稿", new_list_item_path(list_id: @list.id), id: "link_new_item" %>　　　
-  <% end %>
-
-  <%= sort_link(@q, :row_order, "並び替え（作者指定順）") %>　　　
-  <%= sort_link(@q, :item_name, "並び替え（アイテム名）") %>　　　
-  <%= sort_link(@q, :updated_at, "並び替え（アイテム更新日時）") %>
-  <br><br>
-
-  <%# ※外側の div(class="table_items") ：tableタグ1つにつき、アイテムを1つ表示。
-  ※内側の table(class="table_each_item") ：アイテム1つにつき、2行の表を表示。
-  → sort_link ：クリックするたび、2行ずつの表(アイテム1つずつ)を丸ごと並び替えられる。 %>
-  <div class="table_items">
-    <% @items.each do |item| %>
-      <table border="3" width="1000" height="120" class="table_each_item" href="<%= sort_list_item_path(list_id: @list.id, id: item.id) %>">
-        <tbody>
-          <tr>
-            <td width="25%">
-              　<font size="1"><%= item.updated_at.to_s(:datetime_jp) %></font>
-              <% if user_signed_in? && current_user.id == @list.user_id %>
-                　<%= link_to "編集", edit_list_item_path(list_id: @list.id, id: item.id) %>
-                　<%= link_to "削除", list_item_path(list_id: @list.id, id: item.id), method: :delete, data: { confirm: "このアイテムを削除してもよろしいですか？" } %>
-              <% end %>
-              <br><br>
-              <%= "#{item.row_order}:" %>
-              <b><%= item.item_name %></b>
-            </td>
-
-            <td width="50%" colspan="2"><%= safe_linebreak(item.description) %></td>
-
-            <td width="25%">
-              <% if item.images.attached? %>
-                <% item.images.each do |image| %>
-                  <%= image_tag image, width: 50 %>
-                <% end %>
-              <% end %>
-            </td>
-          </tr>
-
-          <tr height="25">
-            <% 4.times do |i| %>
-              <td width="25%">
-                <%= link_to "#{item.tags[i].tag_name}", tag_path(item.tags[i].id, list_id: item.list_id) if item.tags[i] %>
-                <%= "：#{item.item_tags[i].score}" if item.item_tags[i]&.score %>
-              </td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
+  <div class="link_bar">
+    <% if user_signed_in? && current_user.id == @list.user_id %>
+        <%= link_to "リスト編集", edit_list_path(@list.id) %>
+        <%= link_to "リスト削除", list_path(@list.id), method: :delete, data: { confirm: "このリストを削除してもよろしいですか？\nリスト内のアイテムも全て削除されます。" } %>
     <% end %>
+    <span><%= "作者名：" %><%= link_to @list.user.user_name, user_path(@list.user_id) %></span>
   </div>
+</div>
+
+<%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
+<div class="section list_concept_section">
+  <h4>●コンセプト<span class="note"> （表示しきれない場合はスクロール可）</span></h4>
+  <p class="text"><%= safe_linebreak(@list.concept) %></p>
+</div>
+
+<div class="section list_rule_section">
+  <h4>●リスト作成ルール<span class="note"> （表示しきれない場合はスクロール可）</span></h4>
+  <p class="text"><%= safe_linebreak(@list.rule) %></p>
+</div>
+
+<div class="section list_items_section">
+  <h4>●アイテム（リスト内項目）一覧</h4>
+  <p class="note">
+    ※画像を原寸大サイズで表示：画像を右クリック→「新しいタブで画像を開く」をクリック。<br>
+    ※指定したタグのスコア順にアイテムを並び替え：タグ名をクリック→「並び替え（タグスコア）」をクリック。<br>
+    ※リスト作者のみ、アイテムの順番を自由に指定・保存：「並び替え（作者指定順） ▲」の状態で、各アイテムをドラッグ＆ドロップ。
+  </p>
+
+  <div class="link_bar">
+    <% if user_signed_in? && current_user.id == @list.user_id %>
+      <%= link_to "アイテム新規投稿", new_list_item_path(list_id: @list.id), id: "js_link_new_item" %>
+    <% end %>
+    <%= "投稿総数：#{@items.count}" %>
+    <%= sort_link(@q, :row_order, "並び替え（作者指定順）") %>
+    <%= sort_link(@q, :item_name, "並び替え（アイテム名）") %>
+    <%= sort_link(@q, :updated_at, "並び替え（アイテム更新日時）") %>
+  </div>
+
+  <%= render "shared/item_table" %>
 </div>

@@ -1,0 +1,29 @@
+<table class="list_table">
+  <thead>
+    <tr>
+      <th class="list_title_th"><%= sort_link(@q, :title, "リストタイトル") %></th>
+      <th class="list_concept_th">コンセプト<span class="note">（表示しきれない場合はスクロール可）</span></th>
+      <% if @user.blank? %>
+        <th class="user_name_th"><%= sort_link(@q, :user_user_name, "作者名") %></th>
+      <% end %>
+      <th class="list_updated_at_th"><%= sort_link(@q, :updated_at, "リスト更新日時") %></th>
+    </tr>
+  </thead>
+
+  <%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
+  <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
+  <tbody>
+    <% @lists.each_with_index do |list, i| %>
+      <tr id=<%= "list_tr#{i+1}_id#{list.id}" %>>
+        <td class="list_title_td"><%= link_to list.title, list_path(list.id) %></td>
+        <td class="list_concept_td">
+          <div class="list_td_scroll"><%= safe_linebreak(list.concept) %></div>
+        </td>
+        <% if @user.blank? %>
+          <td class="user_name_td"><%= link_to list.user.user_name, user_path(list.user_id) %></td>
+        <% end %>
+        <td class="list_updated_at_td"><%= list.updated_at.to_s(:datetime_jp) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

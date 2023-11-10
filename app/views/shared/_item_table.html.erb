@@ -1,0 +1,60 @@
+<%# ※外側の div(class="item_tables") ：tableタグ1つにつき、アイテムを1つ表示。
+※内側の table(class="item_each_table") ：アイテム1つにつき、2行の表を表示。
+→ sort_link ：クリックするたび、2行ずつの表(アイテム1つずつ)を丸ごと並び替えられる。 %>
+<div class="item_tables" id="js_item_tables">
+  <% @items.each_with_index do |item, i| %>
+    <% if @list.present? %>
+      <table class="item_each_table" id=<%= "item_table#{i+1}_id#{item.id}" %> href="<%= sort_list_item_path(list_id: item.list_id, id: item.id) %>">
+    <% else %>
+      <table class="item_each_table" id=<%= "item_table#{i+1}_id#{item.id}" %>>
+    <% end %>
+        <tbody>
+          <tr>
+            <td class="item_data_td">
+              <div class="link_bar">
+                <span class="item_updated_at_td"><%= item.updated_at.to_s(:datetime_jp) %></span>
+                <% if user_signed_in? && current_user.id == item.list.user_id %>
+                  <%= link_to "編集", edit_list_item_path(list_id: item.list_id, id: item.id) %>
+                  <%= link_to "削除", list_item_path(list_id: item.list_id, id: item.id), method: :delete, data: { confirm: "このアイテムを削除してもよろしいですか？" } %>
+                <% end %>
+              </div>
+              <% if @list.present? %>
+                <%= "#{item.row_order}:" %>
+              <% else %>
+                <div class="item_list_td"><%= link_to "#{item.list.title}", list_path(item.list_id) %></div>
+              <% end %>
+              <span class="item_name_td"><%= item.item_name %></span>
+            </td>
+
+            <%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
+            <td class="item_description_td" colspan="2">
+              <div class="item_td_scroll"><%= safe_linebreak(item.description) %></div>
+            </td>
+
+            <td class="item_image_td">
+              <div class="item_td_grid">
+                <% if item.images.attached? %>
+                  <% item.images.each do |image| %>
+                    <%= image_tag image, class: "item_image" %>
+                  <% end %>
+                <% end %>
+              </div>
+            </td>
+          </tr>
+
+          <tr>
+            <% 4.times do |i| %>
+              <td class="item_tag_td">
+                <% if @list.present? %>
+                  <%= link_to item.tags[i].tag_name, tag_path(item.tags[i].id, list_id: item.list_id) if item.tags[i].present? %>
+                <% else %>
+                  <%= link_to item.tags[i].tag_name, tag_path(item.tags[i].id) if item.tags[i].present? %>
+                <% end %>
+                <%= "：#{item.item_tags[i].score}" if item.item_tags[i]&.score.present? %>
+              </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+  <% end %>
+</div>

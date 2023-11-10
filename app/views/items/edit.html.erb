@@ -1,8 +1,10 @@
-<div class="wrapper">
-  <%= link_to "リストへ戻る：#{@list.title}", list_path(@list.id) %>
-  <br><br>
-
+<div class="section edit_item_heading_section">
   <h2><%= "アイテム編集：#{@item.item_name}" %></h2>
+  <div class="link_bar">
+    <%= link_to "リストへ戻る：#{@list.title}", list_path(@list.id) %>
+  </div>
+</div>
 
+<div class="section edit_item_form_section">
   <%= render partial: "form", locals: { url: list_item_path(list_id: @list.id, id: @item.id), method: :patch } %>
 </div>

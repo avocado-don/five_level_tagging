@@ -1,66 +1,33 @@
-<div class="wrapper">
+<div class="section tag_heading_section">
   <h2><%= "タグ検索：#{@tag.tag_name}" %></h2>
+</div>
 
+<div class="section tag_form_section">
   <%= form_with url: tag_path, method: :get, local: true do |f| %>
-    <div class="field">
-      <%= f.label :list_id, "リスト番号 [任意]" %>　
-      <%= f.number_field :list_id, value: params[:list_id], min: 1, max: 99999 %>　
-      <%= f.submit "送信" %>
-      <p>※入力した場合、リスト内のアイテムのみをタグ検索。リスト内のタグリンクをクリックした場合は、自動入力される。</p>
-      <br><br><br>
+    <div class="field list_id_field">
+      <div class="field_row">
+        <%= f.label :list_id, "●リスト番号 ［任意］" %>
+        <%= f.number_field :list_id, value: params[:list_id], min: 1, class: "list_id_input" %>
+        <%= f.submit "送信" %>
+      </div>
+      <p class="note">
+        ※入力した場合、指定リスト内のアイテムのみをタグ検索。<br>
+        ※リスト内のタグリンクをクリックした場合は、自動入力される。
+      </p>
     </div>
   <% end %>
+</div>
 
-  <%# item.rb (scope :sort_by_item_tag_score_asc ／ _desc) ：1つのタグに紐づくスコアで、アイテムを並び替え。 %>
+<%# item.rb (scope :sort_by_item_tag_score_asc ／ _desc) ：1つのタグに紐づくスコアで、アイテムを並び替え。 %>
+<div class="section tag_items_section">
   <h4>●タグを含むアイテム一覧</h4>
-  <p>※画像を原寸大サイズで表示：画像を右クリック→「新しいタブで画像を開く」をクリック。</p>
-  <%= "検索件数：#{@items.count}" %>　　　
-  <%= sort_link(@q, :item_name, "並び替え（アイテム名）") %>　　　
-  <%= sort_link(@q, :updated_at, "並び替え（アイテム更新日時）") %>　　　
-  <%= sort_link(@q, :item_tag_score, "並び替え（タグスコア）") %>
-  <br><br>
-
-  <%# ※外側の div(class="table_items") ：tableタグ1つにつき、アイテムを1つ表示。
-  ※内側の table(class="table_each_item") ：アイテム1つにつき、2行の表を表示。
-  → sort_link ：クリックするたび、2行ずつの表(アイテム1つずつ)を丸ごと並び替えられる。 %>
-  <div class="table_items">
-    <% @items.each do |item| %>
-      <table border="3" width="1000" height="120" class="table_each_item">
-        <tbody>
-          <tr>
-            <td width="25%">
-              　<font size="1"><%= item.updated_at.to_s(:datetime_jp) %></font>
-              <% if user_signed_in? && current_user.id == item.list.user_id %>
-                　<%= link_to "編集", edit_list_item_path(list_id: item.list_id, id: item.id) %>
-                　<%= link_to "削除", list_item_path(list_id: item.list_id, id: item.id), method: :delete, data: { confirm: "このアイテムを削除してもよろしいですか？" } %>
-              <% end %>
-              <br><br>
-              <font size="1"><%= link_to "#{item.list.title}", list_path(item.list_id) %></font>
-              <br><br>
-              <b><%= item.item_name %></b>
-            </td>
-
-            <td width="50%" colspan="2"><%= safe_linebreak(item.description) %></td>
-
-            <td width="25%">
-              <% if item.images.attached? %>
-                <% item.images.each do |image| %>
-                  <%= image_tag image, width: 50 %>
-                <% end %>
-              <% end %>
-            </td>
-          </tr>
-
-          <tr height="25">
-            <% 4.times do |i| %>
-              <td width="25%">
-                <%= link_to "#{item.tags[i].tag_name}", tag_path(item.tags[i].id) if item.tags[i] %>
-                <%= "：#{item.item_tags[i].score}" if item.item_tags[i]&.score %>
-              </td>
-            <% end %>
-          </tr>
-        </tbody>
-      </table>
-    <% end %>
+  <p class="note">※画像を原寸大サイズで表示：画像を右クリック→「新しいタブで画像を開く」をクリック。</p>
+  <div class="link_bar">
+    <%= "検索件数：#{@items.count}" %>
+    <%= sort_link(@q, :item_name, "並び替え（アイテム名）") %>
+    <%= sort_link(@q, :updated_at, "並び替え（アイテム更新日時）") %>
+    <%= sort_link(@q, :item_tag_score, "並び替え（タグスコア）") %>
   </div>
+
+  <%= render "shared/item_table" %>
 </div>

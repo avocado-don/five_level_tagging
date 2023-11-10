@@ -1,20 +1,17 @@
 <%= form_with model: @list, local: true do |f| %>
-  <div class="field">
-    <%= f.label :title, "リストタイトル [必須]" %><br>
-    <%= f.text_field :title, size: "50x1", autofocus: true %>
-    <br><br>
+  <div class="field title_field">
+    <%= f.label :title, "●リストタイトル ［必須］" %>
+    <%= f.text_field :title, autofocus: true %>
   </div>
 
-  <div class="field">
-    <%= f.label :concept, "コンセプト [任意]" %><br>
-    <%= f.text_area :concept, size: "50x5" %>
-    <br><br>
+  <div class="field concept_field">
+    <%= f.label :concept, "●コンセプト ［任意］" %>
+    <%= f.text_area :concept %>
   </div>
 
-  <div class="field">
-    <%= f.label :rule, "リスト作成ルール [任意]" %><br>
-    <%= f.text_area :rule, size: "50x5", placeholder: "タグのスコア1~5それぞれの段階・程度を表す言葉や代表例などの記載を推奨。" %>
-    <br><br>
+  <div class="field rule_field">
+    <%= f.label :rule, "●リスト作成ルール ［任意］" %>
+    <%= f.text_area :rule, placeholder: "タグのスコア1~5それぞれの段階・程度を表す言葉や代表例などの記載を推奨。" %>
   </div>
 
   <div class="actions">

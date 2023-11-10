@@ -1,44 +1,25 @@
-<div class="wrapper">
-  <h1>Five Level Tagging　(5段階タグ付けアプリ)</h1>
-  <br>
+<h1 class="site_title">Five Level Tagging 【5段階タグ付けアプリ】</h1>
 
-  <h2>全ユーザーが投稿したリスト一覧</h2>
-  <%= "投稿総数：#{@lists.count}　　　※列の見出しをクリックして並び替え" %>　　　
-  <%= link_to "リスト新規投稿（ログイン中のみ）", new_list_path %>
-  <br><br>
+<div class="section lists_heading_section">
+  <h2>リスト一覧（トップページ）</h2>
+</div>
 
-  <table>
-    <table border="1" width="1200">
-    <thead>
-      <tr>
-        <th width="20%"><%= sort_link(@q, :title, "リストタイトル") %></th>
-        <th width="50%">コンセプト</th>
-        <th width="15%"><%= sort_link(@q, :user_user_name, "作者名") %></th>
-        <th width="15%"><%= sort_link(@q, :updated_at, "リスト更新日時") %></th>
-      </tr>
-    </thead>
+<div class="section lists_section">
+  <h4>●全ユーザーが投稿したリスト一覧</h4>
+  <div class="link_bar">
+    <%= link_to "リスト新規投稿（ログイン中のみ可）", new_list_path %>
+    <%= "投稿総数：#{@lists.count}" %>
+    <span class="note">※列の見出しリンクをクリックして並び替え。</span>
+  </div>
 
-    <%# style.css(.td_nowrap) ：tableのセル内に1行で収まらないテキストを、折り返さず省略する。 %>
-    <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
-    <tbody>
-      <% @lists.each do |list| %>
-        <tr>
-          <td class="td_nowrap"><%= link_to "#{list.title}", list_path(list.id) %></td>
-          <td class="td_nowrap"><%= list.concept %></td>
-          <td class="td_nowrap"><%= link_to "#{list.user.user_name}", user_path(list.user_id) %></td>
-          <td class="td_nowrap"><%= list.updated_at.to_s(:datetime_jp) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+  <%= render "shared/list_table" %>
+</div>
 
-  <br>
-  <br>
-  <p><font size="2">※開発中の一時的な措置<br>
-  ●HTMLで非推奨のレイアウト調整をしている。(brタグ、スペースキー空白、tableタグのサイズなど)　→CSSによるレイアウト調整は、一通りの機能実装後に着手する。<br>
-  ●アプリ使用方法の説明を、ビュー上では割愛している。現状ではREADMEに記載。　→ユーザー向けの説明は、一通りの機能実装後に着手する。</font></p>
-  <br>
-  <p><font size="2">※テスト用アカウントにログインして閲覧する皆様へ<br>
-  ●既存データ(サンプルデータ)の編集・削除はご遠慮ください。(user1~2, list1~6, item1~72)<br>
-  ●新規データの投稿・編集・削除は問題ございません。データベースリセットの目安：平日22時頃</font></p>
+<div class="section message_for_testers">
+  <h4>●テスト用アカウントにログインして閲覧する皆様へ</h4>
+  <p class="note">
+    ※既存データ（サンプルデータ）の編集・削除はご遠慮ください。（user1~2, list1~6, item1~72）<br>
+    ※新規データの投稿・編集・削除は問題ございません。（データベースリセットの目安：平日22時頃）<br>
+    ※開発中アプリにつき、レイアウト装飾（配色・フォントなど）は、一通りの機能実装後に着手します。
+  </p>
 </div>

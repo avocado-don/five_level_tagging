@@ -1,8 +1,10 @@
-<div class="wrapper">
-  <%= link_to "リストへ戻る", list_path(@list.id) %>
-  <br><br>
-
+<div class="section edit_list_heading_section">
   <h2><%= "リスト編集：#{@list.title}" %></h2>
+  <div class="link_bar">
+    <%= link_to "リストへ戻る", list_path(@list.id) %>
+  </div>
+</div>
 
+<div class="section edit_list_form_section">
   <%= render "form" %>
 </div>

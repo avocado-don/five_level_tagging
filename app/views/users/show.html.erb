@@ -1,49 +1,33 @@
-<div class="wrapper">
-  <% if user_signed_in? && current_user.id == @user.id %>
-    <%= link_to "ユーザーアカウント編集", edit_user_registration_path %>　　　
-    <%= link_to "ユーザーアカウント削除", user_registration_path, method: :delete, data: { confirm: "ユーザーアカウントを削除してもよろしいですか？\n投稿したリスト・アイテム・スコアも全て削除されます。" } %>
-  <br><br>
-  <% end %>
-
+<div class="section user_heading_section">
   <h2><%= "ユーザー詳細：#{@user.user_name}" %></h2>
-  <br>
-
-  <%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
-  <h4>●連絡先</h4>
-  <p><%= safe_linebreak(@user.contact) %></p>
-  <br>
-
-  <h4>●自己紹介</h4>
-  <p><%= safe_linebreak(@user.profile) %></p>
-  <br>
-
-  <h4>●ユーザーが投稿したリスト一覧</h4>
-  <%= "投稿総数：#{@lists.count}　　　※列の見出しをクリックして並び替え" %>
   <% if user_signed_in? && current_user.id == @user.id %>
-    　　　<%= link_to "リスト新規投稿", new_list_path %>
+    <div class="link_bar">
+      <%= link_to "ユーザーアカウント編集", edit_user_registration_path %>
+      <%= link_to "ユーザーアカウント削除", user_registration_path, method: :delete, data: { confirm: "ユーザーアカウントを削除してもよろしいですか？\n投稿したリスト・アイテム・スコアも全て削除されます。" } %>
+    </div>
   <% end %>
-  <br><br>
+</div>
 
-  <table>
-    <table border="1" width="1200">
-    <thead>
-      <tr>
-        <th width="25%"><%= sort_link(@q, :title, "リストタイトル") %></th>
-        <th width="60%">コンセプト</th>
-        <th width="15%"><%= sort_link(@q, :updated_at, "リスト更新日時") %></th>
-      </tr>
-    </thead>
+<%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
+<div class="section user_contact_section">
+  <h4>●連絡先<span class="note"> （表示しきれない場合はスクロール可）</span></h4>
+  <p class="text"><%= safe_linebreak(@user.contact) %></p>
+</div>
 
-    <%# style.css(.td_nowrap) ：tableのセル内に1行で収まらないテキストを、折り返さず省略する。 %>
-    <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
-    <tbody>
-      <% @lists.each do |list| %>
-        <tr>
-          <td class="td_nowrap"><%= link_to "#{list.title}", list_path(list.id) %></td>
-          <td class="td_nowrap"><%= list.concept %></td>
-          <td class="td_nowrap"><%= list.updated_at.to_s(:datetime_jp) %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<div class="section user_profile_section">
+  <h4>●自己紹介<span class="note"> （表示しきれない場合はスクロール可）</span></h4>
+  <p class="text"><%= safe_linebreak(@user.profile) %></p>
+</div>
+
+<div class="section user_lists_section">
+  <h4>●ユーザーが投稿したリスト一覧</h4>
+  <div class="link_bar">
+    <% if user_signed_in? && current_user.id == @user.id %>
+      <%= link_to "リスト新規投稿", new_list_path %>
+    <% end %>
+    <%= "投稿総数：#{@lists.count}" %>
+    <span class="note">※列の見出しリンクをクリックして並び替え。</span>
+  </div>
+
+  <%= render "shared/list_table" %>
 </div>
