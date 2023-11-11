@@ -4,6 +4,9 @@ function dragAndDropSortItems() {
   const linkRowOrderDesc = $("a[href$='row_order+desc']").length;
   if (linkNewItem && linkRowOrderDesc) {
     $("#js_item_tables").sortable({
+      handle: ".js_handle",
+      opacity: 0.5,
+      placeholder: "item_placeholder",
       axis: "y",
       update: (e, ui) => {
         let sort_path = ui.item.attr("href");

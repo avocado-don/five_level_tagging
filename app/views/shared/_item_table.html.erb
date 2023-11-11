@@ -19,11 +19,11 @@
                 <% end %>
               </div>
               <% if @list.present? %>
-                <%= "#{item.row_order}:" %>
+                <span class="item_row_order_td js_handle"><%= "#{item.row_order}:" %></span>
               <% else %>
                 <div class="item_list_td"><%= link_to "#{item.list.title}", list_path(item.list_id) %></div>
               <% end %>
-              <span class="item_name_td"><%= item.item_name %></span>
+              <span class="item_name_td js_handle"><%= item.item_name %></span>
             </td>
 
             <%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>

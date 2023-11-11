@@ -1,5 +1,6 @@
 /* ※開発中アプリにつき、レイアウト装飾（配色・フォントなど）は、一通りの機能実装後に着手する。 */
 
+/* common */
 * {
   box-sizing: border-box;
 }
@@ -61,7 +62,7 @@ a:hover {
   font-size: 14px;
 }
 
-/* テーブル */
+/* table */
 table {
   border: 2px solid;
   border-collapse: collapse;
@@ -120,6 +121,10 @@ th, td {
   margin-bottom: 16px;
 }
 
+.item_row_order_td {
+  font-size: 18px;
+}
+
 .item_name_td {
   font-weight: bold;
   font-size: 18px;
@@ -161,7 +166,11 @@ th, td {
   cursor: grabbing;
 }
 
-/* フォーム */
+.item_placeholder {
+  height: 240px;
+}
+
+/* form */
 .field {
   margin-bottom: 48px;
   display: flex;
