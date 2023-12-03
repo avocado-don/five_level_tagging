@@ -13,7 +13,7 @@
     <thead>
       <tr>
         <th class="user_name_th"><%= sort_link(@q, :user_name, "ユーザー名") %></th>
-        <th class="user_profile_th">自己紹介<span class="note"> （表示しきれない場合はスクロール可）</span></th>
+        <th class="user_profile_th">自己紹介</th>
         <th class="list_title_th"><%= sort_link(@q, :latest_list_title, "最新リストタイトル") %></th>
         <th class="list_updatedAt_th"><%= sort_link(@q, :latest_list_updated_at, "リスト更新日時") %></th>
       </tr>
@@ -25,8 +25,10 @@
       <% @users.each_with_index do |user, i| %>
         <tr id=<%= "user_tr#{i+1}_id#{user.id}" %>>
           <td class="user_name_td"><%= link_to user.user_name, user_path(user.id) %></td>
-          <td class="user_profile_td">
-            <div class="user_td_scroll"><%= safe_linebreak(user.profile) %></div>
+          <td class="user_profile_td js_show_more_list">
+            <div class="show_more_gradation"></div>
+            <div class="show_more_button"></div>
+            <div class="show_more_content"><%= safe_linebreak(user.profile) %></div>
           </td>
           <td class="list_title_td"><%= link_to user.latest_list.title, list_path(user.latest_list.id) %></td>
           <td class="list_updated_at_td"><%= user.latest_list.updated_at.to_s(:datetime_jp) %></td>

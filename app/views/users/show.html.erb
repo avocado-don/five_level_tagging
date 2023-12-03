@@ -10,13 +10,21 @@
 
 <%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
 <div class="section user_contact_section">
-  <h4>●連絡先<span class="note"> （表示しきれない場合はスクロール可）</span></h4>
-  <p class="text"><%= safe_linebreak(@user.contact) %></p>
+  <h4>●連絡先</h4>
+  <div class="text_box js_show_more_text">
+    <div class="show_more_gradation"></div>
+    <div class="show_more_button"></div>
+    <div class="show_more_content"><%= safe_linebreak(@user.contact) %></div>
+  </div>
 </div>
 
 <div class="section user_profile_section">
-  <h4>●自己紹介<span class="note"> （表示しきれない場合はスクロール可）</span></h4>
-  <p class="text"><%= safe_linebreak(@user.profile) %></p>
+  <h4>●自己紹介</h4>
+  <div class="text_box js_show_more_text">
+    <div class="show_more_gradation"></div>
+    <div class="show_more_button"></div>
+    <div class="show_more_content"><%= safe_linebreak(@user.profile) %></div>
+  </div>
 </div>
 
 <div class="section user_lists_section">

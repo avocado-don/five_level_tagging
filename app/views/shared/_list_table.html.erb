@@ -2,7 +2,7 @@
   <thead>
     <tr>
       <th class="list_title_th"><%= sort_link(@q, :title, "リストタイトル") %></th>
-      <th class="list_concept_th">コンセプト<span class="note">（表示しきれない場合はスクロール可）</span></th>
+      <th class="list_concept_th">コンセプト</th>
       <% if @user.blank? %>
         <th class="user_name_th"><%= sort_link(@q, :user_user_name, "作者名") %></th>
       <% end %>
@@ -16,8 +16,10 @@
     <% @lists.each_with_index do |list, i| %>
       <tr id=<%= "list_tr#{i+1}_id#{list.id}" %>>
         <td class="list_title_td"><%= link_to list.title, list_path(list.id) %></td>
-        <td class="list_concept_td">
-          <div class="list_td_scroll"><%= safe_linebreak(list.concept) %></div>
+        <td class="list_concept_td js_show_more_list">
+          <div class="show_more_gradation"></div>
+          <div class="show_more_button"></div>
+          <div class="show_more_content"><%= safe_linebreak(list.concept) %></div>
         </td>
         <% if @user.blank? %>
           <td class="user_name_td"><%= link_to list.user.user_name, user_path(list.user_id) %></td>

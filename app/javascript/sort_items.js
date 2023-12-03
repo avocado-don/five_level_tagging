@@ -9,8 +9,8 @@ function dragAndDropSortItems() {
       placeholder: "item_placeholder",
       axis: "y",
       update: (e, ui) => {
-        let sort_path = ui.item.attr("href");
-        let index = ui.item.index();
+        const sort_path = ui.item.attr("href");
+        const index = ui.item.index();
         $.ajax({
           type: "PUT",
           url: sort_path,

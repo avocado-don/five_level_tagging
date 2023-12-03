@@ -11,6 +11,7 @@ require("jquery")
 require("jquery-ui/ui/widgets/sortable")
 require("../search_tags")
 require("../sort_items")
+require("../show_more_content")
 
 
 // Uncomment to copy all static images under ../images to the output folder and reference

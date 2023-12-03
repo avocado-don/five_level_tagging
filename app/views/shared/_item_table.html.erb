@@ -27,18 +27,22 @@
             </td>
 
             <%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
-            <td class="item_description_td" colspan="2">
-              <div class="item_td_scroll"><%= safe_linebreak(item.description) %></div>
+            <td class="item_description_td js_show_more_item" colspan="2">
+              <div class="show_more_gradation"></div>
+              <div class="show_more_button"></div>
+              <div class="show_more_content"><%= safe_linebreak(item.description) %></div>
             </td>
 
-            <td class="item_image_td">
-              <div class="item_td_grid">
+            <td class="item_image_td js_show_more_item">
+              <div class="show_more_gradation"></div>
+              <div class="show_more_button"></div>
+              <div class="show_more_content"><div class="item_image_grid">
                 <% if item.images.attached? %>
                   <% item.images.each do |image| %>
                     <%= image_tag image, class: "item_image" %>
                   <% end %>
                 <% end %>
-              </div>
+              </div></div>
             </td>
           </tr>
 

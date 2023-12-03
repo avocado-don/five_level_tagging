@@ -1,6 +1,6 @@
 /* ※開発中アプリにつき、レイアウト装飾（配色・フォントなど）は、一通りの機能実装後に着手する。 */
 
-/* common */
+/* 1-1. common */
 * {
   box-sizing: border-box;
 }
@@ -29,7 +29,7 @@ a:hover {
   gap: 48px;
 }
 
-.page_wrapper {
+.page_wrap {
   margin: 32px 16px;
 }
 
@@ -44,25 +44,58 @@ a:hover {
   margin-bottom: 64px;
 }
 
-.text {
-  white-space: pre-wrap;
-  overflow: scroll;
-  width: 640px;
-  max-height: 160px;
-  border: 1px solid;
-  padding: 4px;
-}
-
-.text:empty {
-  display: none;
-}
-
 .note {
   font-weight: normal;
   font-size: 14px;
 }
 
-/* table */
+.text_box {
+  width: 640px;
+  border: 2px solid;
+  padding: 4px;
+}
+
+.text_box:has(.show_more_content:empty) {
+  display: none;
+}
+
+/* 1-2. common js_show_more_content */
+.js_show_more_text, .js_show_more_list, .js_show_more_item {
+  position: relative;
+}
+
+.show_more_content {
+  overflow: hidden;
+}
+
+.show_more_gradation {
+  display: none;
+  background: linear-gradient(#fff0, #ffff);
+  width: 99%;
+  height: 70%;
+  position: absolute;
+  left: 2px;
+  bottom: 2px;
+}
+
+.show_more_button {
+  display: none;
+  cursor: pointer;
+  background-color: #eee;
+  border: 1px solid;
+  border-radius: 2px;
+  padding: 2px;
+  position: absolute;
+  right: 4px;
+  bottom: 4px;
+  z-index: 1;
+}
+
+.is_visible {
+  display: block;
+}
+
+/* 2-1. table */
 table {
   border: 2px solid;
   border-collapse: collapse;
@@ -71,6 +104,7 @@ table {
 th, td {
   border: 2px solid;
   padding: 4px;
+  vertical-align: top;
 }
 
 .list_title_th {
@@ -89,26 +123,18 @@ th, td {
   width: 208px;
 }
 
-.list_td_scroll, .user_td_scroll {
-  white-space: pre-wrap;
-  overflow: scroll;
-  min-height: 40px;
-  max-height: 80px;
-}
-
-.item_td_scroll {
-  white-space: pre-wrap;
-  overflow: scroll;
-  min-height: 90px;
-  max-height: 180px;
-}
-
 .list_updated_at_td {
   font-size: 15px;
 }
 
+.list_concept_td, .user_profile_td {
+  height: 48px;
+}
+
 .item_data_td {
   width: 300px;
+  height: 150px;
+  padding: 4px 8px;
 }
 
 .item_updated_at_td {
@@ -138,7 +164,7 @@ th, td {
   width: 300px;
 }
 
-.item_td_grid {
+.item_image_grid {
   display: grid;
   grid-template-columns: 140px 140px;
   gap: 2px;
@@ -158,6 +184,7 @@ th, td {
   height: 30px;
 }
 
+/* 2-2. table js_sort_items */
 .ui-sortable-handle {
   cursor: grab;
 }
@@ -170,7 +197,7 @@ th, td {
   height: 240px;
 }
 
-/* form */
+/* 3-1. form */
 .field {
   margin-bottom: 48px;
   display: flex;
@@ -226,6 +253,7 @@ textarea {
   width: 40px;
 }
 
+/* 3-2. form js_search_tags */
 .tag_search_results {
   white-space: pre-wrap;
   width: 488px;

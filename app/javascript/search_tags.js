@@ -1,7 +1,7 @@
 function incrementalSearchTags() {
   const itemForm = document.getElementById("js_item_form");
-  if (itemForm){
-    for (let i = 1; i <= 4; i++){
+  if (itemForm) {
+    for (let i = 1; i <= 4; i++) {
       const inputTag = document.getElementById(`item_form_tag_name${i}`);
       let timer;
       inputTag.addEventListener("input", () => {
