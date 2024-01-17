@@ -41,7 +41,7 @@ class ListsController < ApplicationController
 
   def destroy
     @list.destroy if current_user.id == @list.user_id
-    redirect_to root_path
+    redirect_to user_path(current_user.id)
   end
 
   private

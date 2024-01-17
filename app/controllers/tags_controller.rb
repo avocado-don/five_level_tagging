@@ -22,7 +22,7 @@ class TagsController < ApplicationController
     else
       @q = @tag.items.ransack(params[:q])
     end
-    @q.sorts = "updated_at DESC" if @q.sorts.empty?
+    @q.sorts = "item_tag_score DESC" if @q.sorts.empty?
     @items = @q.result.distinct.includes(:list, :tags)
   end
 

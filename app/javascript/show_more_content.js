@@ -8,7 +8,7 @@ const showMoreContent = (contentWraps, lineNumber) => {
     // ブラウザバックした場合に、前回設定した高さが残っているので、高さをリセットする。
     content.style.height = null;
     const expandedContentHeight = content.clientHeight;
-      if (expandedContentHeight > collapsedContentHeight) {
+    if (expandedContentHeight > collapsedContentHeight) {
       content.style.height = collapsedContentHeight + "px";
       gradation.classList.add("is_visible");
       button.classList.add("is_visible");
