@@ -70,7 +70,7 @@ RSpec.describe ItemForm, type: :model do
       end
 
       it 'tag_name が過去の登録情報と重複する場合は保存できない' do
-        @item_form.save
+        @item_form.save_item_form
         @item_form2 = FactoryBot.build(:item_form, list_id: @list.id)
         @item_form2.tag_names = []
         @item_form2.tag_names[0] = @item_form.tag_names[0]

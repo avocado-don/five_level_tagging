@@ -10,7 +10,7 @@ class ItemsController < ApplicationController
   def create
     @item_form = ItemForm.new(item_form_params)
     if @item_form.valid?
-      @item_form.save
+      @item_form.save_item_form
       renumber_row_order(@list)
       redirect_to list_path(@list.id)
     else
@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
   def update
     @item_form = ItemForm.new(item_form_params)
     if @item_form.valid?
-      @item_form.update(item_form_params, @item)
+      @item_form.update_item_form(item_form_params, @item)
       redirect_to list_path(@list.id)
     else
       render :edit

@@ -11,9 +11,9 @@
 
   <%# 画像ファイル選択ボタンを4つ実装(multipleは不使用) ：別ディレクトリから選択可。ファイル名を別個に表示可。 %>
   <div class="field images_field">
-    <%= f.label :images, "●画像（最大4枚） ［任意］" %>
-    <% 4.times do %>
-      <%= f.file_field :images, name: "item_form[images][]" %>
+    <%= f.label :images, "●画像（最大4枚） ［任意］", for: "item_form_image1" %>
+    <% 4.times do |i| %>
+      <%= f.file_field :images, name: "item_form[images][]", id: "item_form_image#{i+1}" %>
     <% end %>
   </div>
 

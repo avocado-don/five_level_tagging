@@ -14,7 +14,7 @@ class ItemForm
   validates :tag_name, length: { maximum: 25 }
   validates :score, numericality: { only_integer: true, greater_than_or_equal_to: 1, less_than_or_equal_to: 5 }, allow_blank: true
 
-  def save
+  def save_item_form
     item = Item.create(item_name: item_name, description: description, list_id: list_id, images: images)
     4.times do |i|
       if tag_names[i].present?
@@ -26,7 +26,7 @@ class ItemForm
     end
   end
 
-  def update(params, item)
+  def update_item_form(params, item)
     item_tags = item.item_tags
     tag_names = params.delete(:tag_names)
     scores = params.delete(:scores)
