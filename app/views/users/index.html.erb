@@ -20,7 +20,7 @@
     </thead>
 
     <%# app/helpers/application_helper.rb(safe_linebreak) ：レコードカラム内の改行を、HTML上で安全に表示させる。 %>
-    <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(ソート用) %>
+    <%# config/application.rb(time_zone), config/initializers/time_formats.rb(:datetime_jp) ：更新日時のJST表示(並び替え用) %>
     <tbody>
       <% @users.each_with_index do |user, i| %>
         <tr id=<%= "user_tr#{i+1}_id#{user.id}" %>>

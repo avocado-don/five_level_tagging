@@ -13,7 +13,7 @@ CSV.foreach('db/seeds/csv/lists.csv', headers: true) do |row|
   List.create!(user_id: row['user_id'], title: row['title'], concept: row['concept'], rule: row['rule'])
 end
 
-# seedで作成したサンプルデータ群は、更新日時の時差が1000分の1秒単位になる。その時差を拡大して上書き。→ブラウザ上で更新日時を表示・ソートする際、時差が分かりやすく見える。
+# seedで作成したサンプルデータ群は、更新日時の時差が1000分の1秒単位になる。その時差を拡大して上書き。→ブラウザ上で更新日時を表示・並び替えする際、時差を目立たせる。
 lists = List.order("id DESC").to_a
 lists.each_with_index do |list, i|
   list.update(created_at: (i+1).days.ago, updated_at: (i+1).days.ago)

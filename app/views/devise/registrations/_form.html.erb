@@ -6,8 +6,8 @@
 
   <div class="field password_field">
     <% if user_signed_in? && current_user.id == @user.id %>
-      <%= f.label :password, "●パスワード ［任意・非公開］" %>
-      <div class="note">※変更したい時だけ入力する。変更したくない時は空欄。</div>
+      <%= f.label :password, "●新規パスワードに変更 ［任意・非公開］" %>
+      <div class="note">※パスワードを変更したい時だけ入力する。変更したくない時は空欄。</div>
     <% else %>
       <%= f.label :password, "●パスワード ［必須・非公開］" %>
     <% end %>
@@ -16,13 +16,21 @@
 
   <div class="field password_confirmation_field">
     <% if user_signed_in? && current_user.id == @user.id %>
-      <%= f.label :password_confirmation, "●パスワード確認 ［任意・非公開］" %>
-      <div class="note">※変更したい時だけ入力する。変更したくない時は空欄。</div>
+      <%= f.label :password_confirmation, "●新規パスワード確認 ［任意・非公開］" %>
+      <div class="note">※パスワードを変更したい時だけ入力する。変更したくない時は空欄。</div>
     <% else %>
       <%= f.label :password_confirmation, "●パスワード確認 ［必須・非公開］" %>
     <% end %>
     <%= f.password_field :password_confirmation, autocomplete: "new-password", minlength: "8", maxlength: "16", placeholder: "半角英数8~16文字" %>
   </div>
+
+  <% if user_signed_in? && current_user.id == @user.id %>
+    <div class="field current_password_field">
+      <%= f.label :current_password, "●現在のパスワード確認 ［任意・非公開］" %>
+      <div class="note">※パスワードを変更したい時だけ入力する。変更したくない時は空欄。</div>
+      <%= f.password_field :current_password, autocomplete: "current-password", minlength: "8", maxlength: "16", placeholder: "半角英数8~16文字" %>
+    </div>
+  <% end %>
 
   <div class="field real_name_field">
     <%= f.label :real_name, "●本名 ［必須・非公開］" %>

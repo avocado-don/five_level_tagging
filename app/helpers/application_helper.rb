@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def safe_linebreak(str)
-    h(str).gsub(/\R/, '<br>').html_safe
+  def safe_linebreak(text)
+    h(text).gsub(/\R/, '<br>').html_safe
   end
 end

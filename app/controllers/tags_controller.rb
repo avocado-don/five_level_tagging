@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
 
-  # application_controller.rb (def branch_of_search) ：List, Item, Tagモデルのキーワード検索。params[:model]の値により条件分岐。
+  # application_controller.rb (def keyword_search) ：List, Item, Tagモデルのキーワード検索。params[:model]の値により条件分岐。
   # tag.rb (has_one :latest_item_tag) ：タグを含むアイテムの最新更新日時1件ずつを取得する(N+1を回避)。
   def index
     if search_params[:word].present? && search_params[:word] != ""
@@ -8,10 +8,10 @@ class TagsController < ApplicationController
       params[:condition] = "OR"
       keyword_search(search_params)
     else
-      @q = Tag.distinct.ransack(params[:q])
+      @q = Tag.ransack(params[:q])
     end
     @q.sorts = "latest_item_tag_updated_at DESC" if @q.sorts.empty?
-    @tags = @q.result
+    @tags = @q.result.includes(:latest_item_tag)
     @tag_groups = @tags.each_slice(4)
   end
 
@@ -23,13 +23,14 @@ class TagsController < ApplicationController
       @q = @tag.items.ransack(params[:q])
     end
     @q.sorts = "item_tag_score DESC" if @q.sorts.empty?
-    @items = @q.result.distinct.includes(:list, :tags)
+    @items = @q.result.includes(:list, :tags)
   end
 
   def search
-    return nil if incremental_search_params[:keyword] == ""
-    tag = Tag.search_records(incremental_search_params[:keyword]).order("tag_name ASC")
-    render json:{ keyword: tag }
+    keyword = incremental_search_params[:keyword]
+    return nil if keyword == ""
+    tags = Tag.where("tag_name LIKE?", "%#{keyword}%").order("tag_name ASC")
+    render json:{ keyword: tags }
   end
 
   private

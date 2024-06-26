@@ -1,6 +1,7 @@
 const showMoreContent = (contentWraps, lineNumber) => {
   const lineHeight = parseFloat(getComputedStyle(document.body).lineHeight);
   const collapsedContentHeight = lineHeight * lineNumber;
+  const buttonHeight = lineHeight * 1.5;
   for (let i = 0; i < contentWraps.length; i++) {
     const content = contentWraps[i].getElementsByClassName("show_more_content")[0];
     const gradation = contentWraps[i].getElementsByClassName("show_more_gradation")[0];
@@ -15,7 +16,7 @@ const showMoreContent = (contentWraps, lineNumber) => {
       button.textContent = "▼";
       button.addEventListener("click", () => {
         if (gradation.classList.contains("is_visible")) {
-          content.style.height = expandedContentHeight + lineHeight * 1.5 + "px";
+          content.style.height = expandedContentHeight + buttonHeight + "px";
           gradation.classList.remove("is_visible");
           button.textContent = "▲";
         } else {

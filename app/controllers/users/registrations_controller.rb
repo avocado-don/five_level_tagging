@@ -40,10 +40,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  # app/models/user.rb (def update_without_current_password)
-  # ：現在のパスワードを入力せずに(入力欄が空欄のままで)、ユーザー情報更新。別のパスワードを入力すると、パスワード変更。
+  # 現在のパスワードを入力せずに、ユーザー情報(パスワード以外)を更新できる。
+  # 別のパスワードに変更する場合は、現在のパスワードも入力する。
   def update_resource(resource, params)
-    resource.update_without_current_password(params)
+    if params[:password].present? && params[:password_confirmation].present? && params[:current_password].present?
+      resource.update_with_password(params)
+    else
+      params.delete(:current_password)
+      resource.update_without_password(params)
+    end
   end
 
   def after_update_path_for(resource)

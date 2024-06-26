@@ -36,13 +36,15 @@
             <td class="item_image_td js_show_more_item">
               <div class="show_more_gradation"></div>
               <div class="show_more_button"></div>
-              <div class="show_more_content"><div class="item_image_grid">
-                <% if item.images.attached? %>
-                  <% item.images.each do |image| %>
-                    <%= image_tag image, class: "item_image" %>
+              <div class="show_more_content">
+                <div class="item_image_grid">
+                  <% if item.images.attached? %>
+                    <% item.images.each do |image| %>
+                      <%= image_tag image, class: "item_image" %>
+                    <% end %>
                   <% end %>
-                <% end %>
-              </div></div>
+                </div>
+              </div>
             </td>
           </tr>
 

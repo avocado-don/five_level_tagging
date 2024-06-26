@@ -30,8 +30,8 @@ class Tag < ApplicationRecord
     ["item_tags", "latest_item_tag"]
   end
 
-  # application_controller.rb (def branch_of_search) ：List, Item, Tagモデルのキーワード検索。params[:model]の値により条件分岐。
+  # application_controller.rb (def keyword_search) ：List, Item, Tagモデルのキーワード検索。params[:model]の値により条件分岐。
   def self.search_records(keyword)
-    where("tag_name LIKE?", "%#{keyword}%")
+    joins(:latest_item_tag).where("tag_name LIKE?", "%#{keyword}%")
   end
 end

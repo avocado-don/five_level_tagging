@@ -21,7 +21,7 @@ RSpec.describe "Searches", type: :request do
       item_form = build(:item_form, list_id: lists[i].id)
       item_form.tag_names = [ item_form.tag_name ]
       item_form.scores = [ item_form.score ]
-      item_form.save
+      item_form.save_item_form
     end
   end
 
