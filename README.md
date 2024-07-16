@@ -11,14 +11,14 @@
 ## 1-2. 本番環境URL
 　http://3.115.163.111/  
 <br>
+　AWS EC2にデプロイ。サンプルデータを投稿済み。  
+　Basic認証 (ID・Pass)：履歴書・職務経歴書に記載。  
+<br>
 <br>
 
 ## 1-3. テスト用アカウント
 　(1)企業アカウント想定：user1　メールアドレス：aaaa@jp　パスワード：1aaaaaa8  
-<br>
 　(2)個人アカウント想定：user2　メールアドレス：bbbb@jp　パスワード：2bbbbbb8  
-<br>
-　※Basic認証(ID・Pass)：履歴書・職務経歴書に記載。  
 <br>
 　※テスト用アカウントにログインして閲覧する皆様へ  
 　既存データ(サンプルデータ)の編集・削除はご遠慮ください。(user1〜2, list1〜6, item1〜72)  
@@ -42,7 +42,7 @@
 <br>
 <br>
 
-### 1-4-2. リストやユーザーを検索・閲覧
+### 1-4-2. リストやユーザーを検索し、一覧表示・並び替え
 　(1)リスト(詳細ページ)へのアクセス機能：リスト一覧、キーワード検索、タグ検索、マイリストなど。  
 　ユーザー一覧やフォロー一覧からは、各ユーザーが更新した最新リストにアクセスできる。  
 <br>
@@ -298,7 +298,7 @@ http://3.115.163.111/
 
 # [ 3 ] 開発の概要
 ## 3-1. 要件定義
-[リンク：Googleスプレッドシート](https://docs.google.com/spreadsheets/d/1R2Xm6ooFlZaq5JmzDyUoaPThvVbwmWOrE50nmOaFKlg/edit?usp=sharing)  
+　[リンク先：要件定義書 (Googleスプレッドシート)](https://docs.google.com/spreadsheets/d/1R2Xm6ooFlZaq5JmzDyUoaPThvVbwmWOrE50nmOaFKlg/edit?usp=sharing)  
 <br>
 <img width="720" alt="画像：3-1(A)RequirementDefinition" src="app/assets/images/readme/3-1(A)RequirementDefinition.png">
 <br>
@@ -326,9 +326,11 @@ PageTransition.dio
 <br>
 
 ## 3-4. 開発環境
-HTML・CSS・Ruby・JavaScript・MySQL・GitHub・AWS  
-[リンク：GitHubリポジトリ](https://github.com/avocado-don/five_level_tagging)  
-[リンク：GitHubプロジェクトボード](https://github.com/users/avocado-don/projects/2/views/1)　※各タスク内のメモ欄に、作業手順を記録している(自分向けの作業手順書)。  
+　HTML・CSS・Ruby (Ruby on Rails)・JavaScript・MySQL・GitHub  
+　AWS EC2 (MariaDB・Unicorn・Nginx1・Capistrano)  
+<br>
+　[リンク先：GitHubリポジトリ](https://github.com/avocado-don/five_level_tagging)  
+　[リンク先：GitHubプロジェクトボード](https://github.com/users/avocado-don/projects/2/views/1)　※各タスク内のメモ欄に、作業手順を記録。自分向けの作業手順書。  
 <br>
 <img width="720" alt="画像：3-4ProjectBoard" src="app/assets/images/readme/3-4ProjectBoard.png">
 <br>
