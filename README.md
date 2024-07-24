@@ -10,8 +10,8 @@
 
 ## 1-2. 本番環境URL
 　http://3.115.163.111/  
+　※AWS EC2にデプロイ。サンプルデータを投稿済み。  
 <br>
-　AWS EC2にデプロイ。サンプルデータを投稿済み。  
 　Basic認証 (ID・Pass)：履歴書・職務経歴書に記載。  
 <br>
 <br>
@@ -42,7 +42,7 @@
 <br>
 <br>
 
-### 1-4-2. リストやユーザーを検索し、一覧表示・並び替え
+### 1-4-2. リストやユーザーの検索・一覧表示・並び替え
 　(1)リスト(詳細ページ)へのアクセス機能：リスト一覧、キーワード検索、タグ検索、マイリストなど。  
 　ユーザー一覧やフォロー一覧からは、各ユーザーが更新した最新リストにアクセスできる。  
 <br>
@@ -101,6 +101,13 @@
 <br>
 　(3)今回はリスト・タグのジャンルを限定しないことで、幅広い業務や趣味の記録に活用できる汎用性を高めた。  
 　※特定業界向けに開発する場合は、UIやDB設計を特定のジャンル・ターゲットに寄せた方が実用的だと考える。  
+<br>
+<br>
+
+## 1-7. 開発に使用した技術の一例
+　レコード一覧の並び替え(ransack)。複数画像の投稿(ActiveStorage・AWS S3)。サンプルデータ(CSV)。  
+　複数タグ登録。逐次検索。レコード表示順の変更・保存(jQuery UI sortable・ranked-model)。開閉ボタン。  
+　最新の子レコードで親レコード並び替え。パスワード有り/無しで更新。AND/OR検索。複数モデル選択検索。  
 <br>
 <br>
 <br>
@@ -326,8 +333,8 @@ PageTransition.dio
 <br>
 
 ## 3-4. 開発環境
-　HTML・CSS・Ruby (Ruby on Rails)・JavaScript・MySQL・GitHub  
-　AWS EC2 (MariaDB・Unicorn・Nginx1・Capistrano)  
+　(1)開発言語：Ruby (Ruby on Rails)・SQL・HTML・CSS・JavaScript  
+　(2)クラウドサービス：GitHub・AWS S3・AWS EC2 (MariaDB・Unicorn・Nginx1・Capistrano)  
 <br>
 　[リンク先：GitHubリポジトリ](https://github.com/avocado-don/five_level_tagging)  
 　[リンク先：GitHubプロジェクトボード](https://github.com/users/avocado-don/projects/2/views/1)　※各タスク内のメモ欄に、作業手順を記録。自分向けの作業手順書。  
