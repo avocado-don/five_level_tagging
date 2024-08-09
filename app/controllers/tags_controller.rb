@@ -23,7 +23,7 @@ class TagsController < ApplicationController
       @q = @tag.items.ransack(params[:q])
     end
     @q.sorts = "item_tag_score DESC" if @q.sorts.empty?
-    @items = @q.result.includes(:list, :tags)
+    @items = @q.result.with_attached_images.includes(:list, :tags)
   end
 
   def search

@@ -8,7 +8,7 @@ class SearchesController < ApplicationController
       if search_params[:model] == "List"
         @lists = @q.result.includes(:user)
       elsif search_params[:model] == "Item"
-        @items = @q.result.preload(:list, :tags)
+        @items = @q.result.with_attached_images.preload(:list, :tags)
       end
     end
   end

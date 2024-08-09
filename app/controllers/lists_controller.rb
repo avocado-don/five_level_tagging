@@ -24,7 +24,7 @@ class ListsController < ApplicationController
   def show
     @q = @list.items.ransack(params[:q])
     @q.sorts = "row_order ASC" if @q.sorts.empty?
-    @items = @q.result.includes(:tags)
+    @items = @q.result.with_attached_images.includes(:list, :tags)
   end
 
   def edit

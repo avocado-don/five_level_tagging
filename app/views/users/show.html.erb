@@ -33,7 +33,7 @@
     <% if user_signed_in? && current_user.id == @user.id %>
       <%= link_to "リスト新規投稿", new_list_path %>
     <% end %>
-    <%= "投稿総数：#{@lists.count}" %>
+    <%= "投稿総数：#{@lists.length}" %>
     <span class="note">※列の見出しリンクをクリックして並び替え。</span>
   </div>
 

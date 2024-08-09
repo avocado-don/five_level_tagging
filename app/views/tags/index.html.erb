@@ -20,7 +20,7 @@
 <div class="section tags_section">
   <h4>●投稿済みのタグ一覧</h4>
   <div class="link_bar">
-    <%= "投稿総数：#{@tags.count}" %>
+    <%= "投稿総数：#{@tags.length}" %>
     <%= sort_link(@q, :tag_name, "並び替え（タグ名）") %>
     <%= sort_link(@q, :latest_item_tag_updated_at, "並び替え（タグを含むアイテムの最新更新日時）") %>
     <span class="note">※表の見方：1段目が1〜4番目、2段目が5〜8番目…</span>

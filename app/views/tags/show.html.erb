@@ -23,7 +23,7 @@
   <h4>●タグを含むアイテム一覧</h4>
   <p class="note">※画像を原寸大サイズで表示：画像を右クリック→「新しいタブで画像を開く」をクリック。</p>
   <div class="link_bar">
-    <%= "検索件数：#{@items.count}" %>
+    <%= "検索件数：#{@items.length}" %>
     <%= sort_link(@q, :item_name, "並び替え（アイテム名）") %>
     <%= sort_link(@q, :updated_at, "並び替え（アイテム更新日時）") %>
     <%= sort_link(@q, :item_tag_score, "並び替え（タグスコア）") %>

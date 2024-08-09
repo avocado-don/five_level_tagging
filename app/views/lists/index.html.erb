@@ -8,7 +8,7 @@
   <h4>●全ユーザーが投稿したリスト一覧</h4>
   <div class="link_bar">
     <%= link_to "リスト新規投稿（ログイン中のみ可）", new_list_path %>
-    <%= "投稿総数：#{@lists.count}" %>
+    <%= "投稿総数：#{@lists.length}" %>
     <span class="note">※列の見出しリンクをクリックして並び替え。</span>
   </div>
 
