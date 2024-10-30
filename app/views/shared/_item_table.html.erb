@@ -21,7 +21,7 @@
               <% if @list.present? %>
                 <span class="item_row_order_td js_handle"><%= "#{item.row_order}:" %></span>
               <% else %>
-                <div class="item_list_td"><%= link_to "#{item.list.title}", list_path(item.list_id) %></div>
+                <div class="item_list_td"><%= link_to item.list.title, list_path(item.list_id) %></div>
               <% end %>
               <span class="item_name_td js_handle"><%= item.item_name %></span>
             </td>
