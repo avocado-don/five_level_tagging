@@ -1,27 +1,26 @@
-　※記載内容および画像は、全て開発中のもの。CSSによるレイアウト装飾(配色・フォントなど)は、一通りの機能実装後に着手する予定。  
+　**README：オリジナルアプリの機能・ソースコードの画像つき解説**  
+　Ruby on Rails, JavaScript, AWSなどを用いたWebアプリの個人開発(企画・要件定義・設計・開発・テスト)  
+<br>
+　※記載内容および画像は、全て開発中のもの。  
+　※機能の実装、コーディングの実践、技術の習得を優先するため、CSS装飾(配色・フォントなどデザインの充実)は最低限の簡素なものに留めている。  
 <br>
 <br>
 
 # [ 1 ] アプリケーションの概要
-## 1-1. アプリ名称
+## 1-1. アプリの名称
 　**Five Level Tagging 【5段階タグ付けアプリ】**  
-<br>
-　※業務アプリ・趣味アプリ両対応。  
 <br>
 <br>
 
 ## 1-2. 本番環境URL
-　http://3.115.163.111/  
-<br>
-　※AWS EC2にデプロイ。サンプルデータを投稿済み。  
-<br>
-　※Basic認証 (ID・Pass)：履歴書・職務経歴書に記載。  
+　http://3.115.163.111  
+　※Basic認証 (ID／Pass)：限定公開のポートフォリオに記載。  
 <br>
 <br>
 
 ## 1-3. テスト用アカウント
-　(1)企業アカウント想定：user1　メールアドレス：aaaa@jp　パスワード：1aaaaaa8  
-　(2)個人アカウント想定：user2　メールアドレス：bbbb@jp　パスワード：2bbbbbb8  
+　(1)業務用アカウントをイメージ(user1) メールアドレス：aaaa@jp／パスワード：1aaaaaa8  
+　(2)趣味用アカウントをイメージ(user2) メールアドレス：bbbb@jp／パスワード：2bbbbbb8  
 <br>
 　※テスト用アカウントにログインして閲覧する皆様へ  
 　既存データ(サンプルデータ)の編集・削除はご遠慮ください。(user1〜2, list1〜6, item1〜72)  
@@ -29,7 +28,10 @@
 <br>
 <br>
 
-## 1-4. アプリ使用方法の概要
+## 1-4. アプリの主な機能
+　業務用・趣味用の利用に両対応。  
+<br>
+
 ### 1-4-1. リスト(アイテム一覧表)を投稿し、各アイテムに説明・特徴タグ・5段階スコアを設定
 　(1)ユーザーが自由に決めたテーマに基づき、記録・発信したい情報を投稿できる(企業の業務や、個人の趣味)。  
 　情報を一覧化するページとして「リスト」を投稿する。リスト内の個々の項目として「アイテム」を投稿する。  
@@ -55,7 +57,7 @@
 <br>
 <br>
 
-## 1-5. アプリ活用例
+## 1-5. アプリの活用例
 　(1)本番環境に投稿済みのサンプルデータ(list3)：「【小学生低学年】絵本・紙芝居の読み聞かせ」  
 　書籍・音楽・映像など、鑑賞作品の評価項目・評価値やジャンルを、リスト化・タグづけする。  
 　「怖い:1」「おばけ」「夏」の紙芝居  
@@ -83,8 +85,8 @@
 <br>
 <br>
 
-## 1-6. アプリを作成した背景
-### 1-6-1. 業務実績：情報をリスト化・タグ化・数値化し、特徴の把握や比較を効率化した
+## 1-6. アプリを制作した背景
+### 1-6-1. ツール化経験：情報をリスト化・タグ化・数値化し、特徴の把握や比較を効率化した
 　(1)保育士時代、献立や活動の記録を手書きで作成してファイリングするのが慣例、という職場を複数経験した。  
 　新たな計画を立てる際、過去の献立や活動を参照しつつも、丸被りは避けたい。献立や活動の実施時期や順番、実施の意図や効果を、数年単位で比較したい。そのたび、数年分の記録を何枚もめくって探し、読み比べていた。  
 <br>
@@ -108,8 +110,8 @@
 <br>
 
 ## 1-7. 開発に使用した技術の一例
-　レコード一覧の並び替え(ransack)。複数画像の投稿(ActiveStorage・AWS S3)。サンプルデータ(CSV)。  
-　複数タグ登録。逐次検索。レコード表示順の変更・保存(jQuery UI sortable・ranked-model)。開閉ボタン。  
+　レコード一覧の並び替え(ransack)。複数画像の投稿(ActiveStorage, AWS S3)。サンプルデータ(CSV)。  
+　複数タグ登録。逐次検索。レコード表示順の変更・保存(jQuery UI sortable, ranked-model)。開閉ボタン。  
 　最新の子レコードで親レコード並び替え。パスワード有り/無しで更新。AND/OR検索。複数モデル選択検索。  
 <br>
 <br>
@@ -339,8 +341,8 @@ PageTransition.dio
 <br>
 
 ## 3-4. 開発環境
-　(1)開発言語：Ruby (Ruby on Rails)・SQL・HTML・CSS・JavaScript  
-　(2)クラウドサービス：GitHub・AWS S3・AWS EC2 (MariaDB・Unicorn・Nginx1・Capistrano)  
+　(1)開発言語：Ruby (Ruby on Rails), SQL, HTML, CSS, JavaScript  
+　(2)使用ツール：Terminal, VSCode, GitHub, AWS S3, AWS EC2 (MariaDB, Unicorn, Nginx1, Capistrano)  
 <br>
 　[リンク先：GitHubリポジトリ](https://github.com/avocado-don/five_level_tagging)  
 　[リンク先：GitHubプロジェクトボード](https://github.com/users/avocado-don/projects/2/views/1)　※各タスク内のメモ欄に、作業手順を記録。自分向けの作業手順書。  
@@ -361,7 +363,8 @@ PageTransition.dio
 
 # [ 4 ] 開発の工夫
 ## 4-1. 投稿フォーム：アイテム1つとタグ・スコア4組を1クリックで一括保存
-　アプリの機能「2-1-3. アイテム(リスト内の各項目)・タグ・スコアの一括投稿」に関連する開発。  
+　関連機能「2-1-3. アイテム(リスト内の各項目)・タグ・スコアの一括投稿」  
+　使用コード一例：変数埋め込み(id属性)　配列パラメータ(name属性)　フォームオブジェクト(ActiveModel::Model　attr_accessor　validates)　first_or_create　pluck　params.delete　セーフナビゲーション  
 <br>
 /lists/1/items/new  
 <img width="320" alt="画像：2-1-3(A)feature" src="app/assets/images/readme/2-1-3(A)feature.png">
@@ -405,7 +408,8 @@ app/views/items/_form.html.erb
 <br>
 
 ### 4-1-3. アイテム投稿・編集フォーム：タグ・スコアの入力値を4つずつ、配列に入れて送信
-　(1)4つの入力欄に入力した値を、1つの配列に格納する。さらに、配列自体を値として、ハッシュに格納する。  
+　(1)配列パラメータ送信  
+　4つの入力欄に入力した値を、1つの配列に格納する。さらに、配列自体を値として、ハッシュに格納する。  
 　26: text_fieldのname属性：item_form[tag_names][]に設定。4つのタグ入力欄のname属性を統一。  
 　35: number_fieldのname属性：item_form[scores][]に設定。4つのスコア入力欄のname属性を統一。  
 <br>
@@ -547,8 +551,10 @@ app/controllers/items_controller.rb
 <br>
 
 ### 4-1-9. アイテム一覧表：アイテムに紐づくタグ、タグに紐づくスコアが存在するなら表示
-　(1)アイテム・タグ・スコアの一覧表示に必要なレコードを取得する(items, tags, item_tags)。  
-　8: includesメソッド：複数のアイテムに紐づく、複数のタグをまとめて取得。同時に、中間テーブルitem_tagsのレコード(スコアカラムを含む)もまとめて取得できる。  
+　(1)アイテム・タグ・スコア・画像の一覧表示に必要なレコードを取得する(items, tags, item_tags, images)。  
+　8: includesメソッド：複数のアイテムに紐づく、複数のタグをまとめて事前読み込み(N+1回避)。同時に、中間テーブルitem_tagsのレコード(スコアカラムを含む)もまとめて取得できる。  
+<br>
+　8: with_attached_images(with_attached_attachment_name)メソッド：複数のアイテムに紐づく、複数の画像情報(blob)をまとめて事前読み込み(N+1回避)。attachment_nameは、Itemモデルにて命名(has_many_attached :images)。  
 <br>
 app/controllers/lists_controller.rb  
 <img width="480" alt="画像：4-1-9(A)idea" src="app/assets/images/readme/4-1-9(A)idea.png">
@@ -574,7 +580,8 @@ app/views/shared/_item_table.html.erb
 <br>
 
 ## 4-2. タグ名ボタン：文字入力のたびに既存タグを再検索、ボタンを再生成
-　アプリの機能「2-1-3. タグ入力時の逐次検索」に関連する開発。  
+　関連機能「2-1-3. タグ入力時の逐次検索」  
+　使用コード一例：変数埋め込み(id属性)　setTimeout　XMLHttpRequest　LIKE?　createElement　innerHTML　insertAdjacentElement　inline-block  
 <br>
 /lists/1/items/new  
 <img width="320" alt="画像：4-2-0(A)idea" src="app/assets/images/readme/4-2-0(A)idea.png">
@@ -645,7 +652,8 @@ app/assets/stylesheets/style.css
 <br>
 
 ## 4-3. 一覧順番変更：表示位置を入れ替え、アイテム番号を割り込ませて更新
-　アプリの機能「2-1-4. 自作リストのアイテム一覧：ドラッグ＆ドロップして表示順番を変更・保存」に関連する開発。  
+　関連機能「2-1-4. 自作リストのアイテム一覧：ドラッグ＆ドロップして表示順番を変更・保存」  
+　使用コード一例：jQuery UI sortable(ui-sortable-handle　ui.item.attr　ui.item.index)　ranked-model(row_order　with_same)　path埋め込み(href属性)　後方一致・存在判定($=''　length)  
 <br>
 /lists/6  
 <img width="720" alt="画像：2-1-4(A)feature" src="app/assets/images/readme/2-1-4(A)feature.gif">
@@ -700,9 +708,9 @@ app/views/shared/_item_table.html.erb
 <br>
 
 ### 4-3-3. sortableメソッド：アイテム一覧の表示位置を、ドラッグ＆ドロップで入れ替える
-　3, 5: #js_link_new_item (id要素)：ログイン中、かつ「自作リストの詳細画面」でのみ、関数処理を実行。つまり、リスト作者のみが表示順番号を変更可能。  
+　3, 5: #js_link_new_item (id要素)、lengthプロパティ：ログイン中、かつ「自作リストの詳細画面」でのみ、関数処理を実行。つまり、リスト作者のみが表示順番号を変更可能。  
 <br>
-　4-5: a[href$='row_order+desc'] (a要素)：「並び替え（作者指定順） ▲」(昇順表示)の画面でのみ、関数処理を実行。降順表示画面への切り替えリンクボタン(a要素のhref属性)と後方一致($='')しているか判定。  
+　4-5: a[href$='row_order+desc'] (a要素)、lengthプロパティ：「並び替え（作者指定順） ▲」(昇順表示)の画面でのみ、関数処理を実行。降順表示画面への切り替えリンクボタン(a要素のhref属性)と後方一致($='')するか判定。  
 　つまり、アイテム一覧が1からの連番で並んでいる状態を起点に、表示位置を入れ替え、1からの連番を振り直す。  
 <br>
 　6: sortableメソッド：指定した要素の直下にある子要素群の表示順を、ドラッグ＆ドロップで入れ替え可能にする。アイテム一覧表内の各アイテム。  
@@ -770,7 +778,8 @@ app/controllers/items_controller.rb
 <br>
 
 ## 4-4. コンテンツ表示変更：一定の高さを超えたら省略、ボタンで展開・省略
-　アプリの機能「2-1-1. 表示が省略されたコンテンツの開閉」に関連する開発。  
+　関連機能「2-1-1. 表示が省略されたコンテンツの開閉」  
+　使用コード一例：状態クラス(classList.add／remove／contains　display: none／block)　擬似クラス(has・empty)　background: linear-gradient　z-index　overflow: hidden　lineHeight　clientHeight　style.height  
 <br>
 　ユーザーの投稿したコンテンツ(テキストや画像)：投稿内容が一定の高さを超えた場合、①表示を折りたたむ。  
 　②開閉ボタンを表示。クリックするたびに、表示の展開(全体表示)と折りたたみ(省略表示)を切り替える。  
@@ -911,7 +920,8 @@ app/javascript/show_more_content.js
 <br>
 
 ## 4-5. 親子モデルの更新日時を同期：リスト更新機会を増加、一覧上位に表示
-　アプリの機能「2-1-1. リスト一覧やアイテム一覧の表示・並び替え」に関連する開発。  
+　関連機能「2-1-1. リスト一覧やアイテム一覧の表示・並び替え」  
+　使用コード一例：ransack(sort_link)　belongs_to(touch: true)　assign_attributes・save(touch: false)　no_touching　seeds.rb(CSV.foreach　days／hour.ago)  
 <br>
 /lists  
 <img width="720" alt="画像：4-5-0(A)idea" src="app/assets/images/readme/4-5-0(A)idea.png">
@@ -1000,7 +1010,8 @@ db/seeds.rb
 <br>
 
 ## 4-6. 最新リスト：ユーザーと1対多のリストから最新の1件を取得(N+1回避)
-　アプリの機能「2-1-5. ユーザー一覧(および各ユーザーの最新リスト)の表示・並び替え」に関連する開発。  
+　関連機能「2-1-5. ユーザー一覧(および各ユーザーの最新リスト)の表示・並び替え」  
+　使用コード一例：has_one・class_name　<<~SQL(NOT EXISTS・SELECT・WHERE)　ransack(ransackable_associations)  
 <br>
 /users  
 <img width="720" alt="画像：2-1-5(A)feature" src="app/assets/images/readme/2-1-5(A)feature.png">
@@ -1041,7 +1052,8 @@ app/views/users/index.html.erb
 <br>
 
 ## 4-7. パスワード：未入力時は他カラムのみ更新、入力時はパスワードも更新
-　アプリの機能「2-1-5. マイページの表示」に関連する開発。  
+　関連機能「2-1-5. マイページの表示」  
+　使用コード一例：devise_for・registrations　password・password_confirmation・current_password　update_resource(update_with_password　update_without_password)　params.delete  
 <br>
 　現在のパスワードを入力せずに、ユーザー情報(パスワード以外)を更新。パスワードはログイン時に1回入力。  
 　情報を繰り返し細かく修正しやすい。利便性を優先。  
@@ -1106,7 +1118,8 @@ app/controllers/users/registrations_controller.rb
 <br>
 
 ## 4-8. 検索フォーム：AND/OR選択、複数モデル選択、結果を同じ画面に表示
-　アプリの機能「2-1-6. キーワード検索：リストやアイテムの表示・並び替え、各アイテムの親リストへ遷移」に関連する開発。  
+　関連機能「2-1-6. キーワード検索：リストやアイテムの表示・並び替え、各アイテムの親リストへ遷移」  
+　使用コード一例：text_field・value　radio_button・checked　squish・split　空のモデルオブジェクト(constantize・none)　joins・where・LIKE?　merge・or　distinct・ransack　preload  
 <br>
 　AND検索またはOR検索、リストまたはアイテムを選択して検索。検索フォームの下に検索結果も表示。同じ画面で操作と表示を完結し、結果確認からの再検索をスムーズにする。  
 <br>
@@ -1221,7 +1234,8 @@ app/views/shared/_item_table.html.erb
 <br>
 
 ## 4-9. タグ一覧：同一カラムを4列表示、最新アイテムの更新日時で並び替え
-　アプリの機能「2-1-7. タグ検索」に関連する開発。  
+　関連機能「2-1-7. タグ検索」  
+　使用コード一例：has_one・class_name　<<~SQL(NOT EXISTS・SELECT・WHERE)　ransack(ransackable_associations)　text_field・value　squish・split　LIKE?　or　distinct・ransack　each_slice  
 <br>
 　タグ一覧・検索画面に遷移し、検索を実行していない時は、タグを全件表示。ワード検索で件数を絞り込む。  
 　検索フォームの下に検索結果も表示。同じ画面で操作と表示を完結し、結果確認からの再検索をスムーズにする。  
@@ -1297,7 +1311,8 @@ app/views/tags/index.html.erb
 <br>
 
 ## 4-10. タグ詳細(アイテム一覧)：タグ詳細画面のIDに紐づくスコアで並び替え
-　アプリの機能「2-1-7. タグ(およびリスト)を指定してアイテム表示、スコア順にアイテム並び替え」に関連する開発。  
+　関連機能「2-1-7. タグ(およびリスト)を指定してアイテム表示、スコア順にアイテム並び替え」  
+　使用コード一例：link_to(任意パラメータ付与)　ransack(scope :sort_by_ソートキー_asc／desc)  
 <br>
 　タグ詳細画面に遷移時、1つのタグ(タグ詳細画面のID)に紐づく複数アイテムを表示。  
 　加えて、リストIDを指定した場合、1つのタグ(タグ詳細画面のID)と1つのリストに紐づく複数アイテムを表示。  
