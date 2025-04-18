@@ -3,7 +3,7 @@
 </div>
 
 <div class="section users_section">
-  <h4>●リストを投稿したユーザー一覧</h4>
+  <h4>●アカウント登録済みのユーザー一覧</h4>
   <div class="link_bar">
     <%= "ユーザー総数：#{@users.length}" %>
     <span class="note">※列の見出しリンクをクリックして並び替え。</span>
@@ -30,8 +30,8 @@
             <div class="show_more_button"></div>
             <div class="show_more_content"><%= safe_linebreak(user.profile) %></div>
           </td>
-          <td class="list_title_td"><%= link_to user.latest_list.title, list_path(user.latest_list.id) %></td>
-          <td class="list_updated_at_td"><%= user.latest_list.updated_at.to_s(:datetime_jp) %></td>
+          <td class="list_title_td"><%= link_to user.latest_list.title, list_path(user.latest_list.id) if user.latest_list.present? %></td>
+          <td class="list_updated_at_td"><%= user.latest_list.updated_at.to_s(:datetime_jp) if user.latest_list.present? %></td>
         </tr>
       <% end %>
     </tbody>
