@@ -9,15 +9,15 @@
     <%= f.text_area :description %>
   </div>
 
-  <%# 画像ファイル選択ボタンを4つ実装(multipleは不使用) ：別ディレクトリから選択可。ファイル名を別個に表示可。 %>
+  <%# 画像ファイル選択ボタンを複数実装(multipleは不使用) ：別ディレクトリから選択可。ファイル名を別個に表示可。 %>
   <div class="field images_field">
-    <%= f.label :images, "●画像（最大4枚） ［任意］", for: "item_form_image1" %>
-    <% 4.times do |i| %>
+    <%= f.label :images, "●画像（最大#{Max::IMAGES_PER_ITEM}枚） ［任意］", for: "item_form_image1" %>
+    <% Max::IMAGES_PER_ITEM.times do |i| %>
       <%= f.file_field :images, name: "item_form[images][]", id: "item_form_image#{i+1}" %>
     <% end %>
   </div>
 
-  <% 4.times do |i| %>
+  <% Max::TAGS_PER_ITEM.times do |i| %>
     <div class="field tag_name_score_field">
       <%= f.label :tag_name, "●タグ名(#{i+1}) ［任意］", for: "item_form_tag_name#{i+1}" %>
       <% if @item.present? %>

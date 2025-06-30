@@ -12,7 +12,7 @@ class TagsController < ApplicationController
     end
     @q.sorts = "latest_item_tag_updated_at DESC" if @q.sorts.empty?
     @tags = @q.result.includes(:latest_item_tag)
-    @tag_groups = @tags.each_slice(4)
+    @tag_groups = @tags.each_slice(Max::TAGS_IN_ROW)
   end
 
   def show
