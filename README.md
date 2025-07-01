@@ -401,8 +401,13 @@ db/seeds/csv/item_tags.numbers
 　22・26: labelのfor属性とtext_fieldのid属性を紐づける際、ブロック変数iを使う(item_form_tag_name#{i+1})。  
 　変数を使わないと、全てのラベルが1つ目の入力欄に紐づいてしまう。31・35のlabelとnumber_fieldも同様。  
 <br>
-app/views/items/_form.html.erb  
-<img width="720" alt="画像：4-1-2(B)idea" src="app/assets/images/readme/4-1-2(B)idea.png">
+config/initializers/constants.rb  
+<img width="600" alt="画像：4-1-2(B)idea" src="app/assets/images/readme/4-1-2(B)idea.png">
+<br>
+<br>
+<br>
+app/views/items/_form.html.erb　※ TAGS_PER_ITEM = 4  
+<img width="720" alt="画像：4-1-2(C)idea" src="app/assets/images/readme/4-1-2(C)idea.png">
 <br>
 <br>
 <br>
@@ -413,7 +418,7 @@ app/views/items/_form.html.erb
 　26: text_fieldのname属性：item_form[tag_names][]に設定。4つのタグ入力欄のname属性を統一。  
 　35: number_fieldのname属性：item_form[scores][]に設定。4つのスコア入力欄のname属性を統一。  
 <br>
-app/views/items/_form.html.erb  
+app/views/items/_form.html.erb　※ TAGS_PER_ITEM = 4  
 <img width="500" alt="画像：4-1-3(A)idea" src="app/assets/images/readme/4-1-3(A)idea.png">
 <br>
 <br>
@@ -443,9 +448,9 @@ app/controllers/items_controller.rb
 　8-9: attr_accessorメソッド：配列tag_namesとscoresを指定し、ItemFormクラスでの取得と変更を許可。  
 　配列から取り出した値の保存先カラム名tag_nameとscoreも、配列と分けて指定。  
 <br>
-　13-15: validatesメソッド：配列(tag_names, scores)とカラム名(tag_name, score)両方の値を、保存時に検証。  
+　14-16: validatesメソッド：配列(tag_names, scores)とカラム名(tag_name, score)両方の値を、保存時に検証。  
 <br>
-app/models/item_form.rb  
+app/models/item_form.rb　※ IMAGES_PER_ITEM = 4, TAGS_PER_ITEM = 4  
 <img width="640" alt="画像：4-1-4(B)idea" src="app/assets/images/readme/4-1-4(B)idea.png">
 <br>
 <br>
@@ -456,23 +461,23 @@ app/models/item_form.rb
 　アイテム→タグ→中間テーブル(スコアも含む)の順にレコードを保存する。  
 　アイテムはフォーム入力が必須(必ず保存)、タグとスコアはフォーム入力が任意(保存しない場合もある)。  
 <br>
-　20: 配列tag_namesの0〜3番目に値が入っている場合(タグをフォームに入力した場合)、タグの保存処理を実行。  
+　21: 配列tag_namesの0〜3番目に値が入っている場合(タグをフォームに入力した場合)、タグの保存処理を実行。  
 <br>
-　21: first_or_createメソッド：フォームに入力したタグと同名のタグが、tagsテーブルに既に存在する場合、既存タグのレコードを取得する。存在しない場合、新規タグを保存する。  
+　22: first_or_createメソッド：フォームに入力したタグと同名のタグが、tagsテーブルに既に存在する場合、既存タグのレコードを取得する。存在しない場合、新規タグを保存する。  
 <br>
 <br>
 　(2)アイテムとタグをフォームに入力した場合、中間テーブルにもレコードを保存する。  
 　かつ、タグに紐づくスコアは入力していない場合、アイテムとタグの紐づけのみを保存(item_id, tag_id)。  
 　逆に、スコアも入力した場合、アイテム・タグの紐づけと共にスコアも保存(item_id, tag_id, score)。  
 <br>
-　23: timesメソッドのループ処理内で、同じ添字を使い、tag_names[0]〜[3]に紐づくscores[0]〜[3]を取得する。  
+　24: timesメソッドのループ処理内で、同じ添字を使い、tag_names[0]〜[3]に紐づくscores[0]〜[3]を取得する。  
 　tag_names[i]に紐づくスコアを入力していない場合、scores[i]の値は空となり、中間テーブルに保存されない。  
 <br>
 　なお、タグに紐づかないスコアだけを保存するケースは、仕様上存在しない(フォーム上でタグ欄が空欄のまま、紐づくスコア欄にだけ入力したとしても、スコアを保存しない)。  
 <br>
-　※22: no_touchingメソッド：開発の工夫4-5にて後述。  
+　※23: no_touchingメソッド：開発の工夫4-5にて後述。  
 <br>
-app/models/item_form.rb  
+app/models/item_form.rb　※ TAGS_PER_ITEM = 4  
 <img width="720" alt="画像：4-1-5(A)idea" src="app/assets/images/readme/4-1-5(A)idea.png">
 <br>
 <br>
@@ -500,8 +505,8 @@ app/controllers/items_controller.rb
 　24: text_fieldのvalue属性：配列@item_form.tag_namesのi番目の値を、入力欄(id: i+1番)の初期値に設定。  
 　33: number_fieldのvalue属性：配列@item_form.scoresのi番目の値を、入力欄(id: i+1番)の初期値に設定。  
 <br>
-app/views/items/_form.html.erb  
-<img width="720" alt="画像：4-1-2(B)idea" src="app/assets/images/readme/4-1-2(B)idea.png">
+app/views/items/_form.html.erb　※ TAGS_PER_ITEM = 4  
+<img width="720" alt="画像：4-1-2(C)idea" src="app/assets/images/readme/4-1-2(C)idea.png">
 <br>
 <br>
 <br>
@@ -513,28 +518,28 @@ app/views/items/_form.html.erb
 
 ### 4-1-8. フォームオブジェクト：アイテム1つに紐づくタグ4つ・スコア4つを更新または削除
 　(1)ItemFormクラス内で、update_item_formメソッドを新たに定義する。updateアクション内で実行する。  
-　29: 引数：編集フォームから送信されたitem_form_params(編集後のデータ)と、@item(編集前のレコード)。  
+　30: 引数：編集フォームから送信されたitem_form_params(編集後のデータ)と、@item(編集前のレコード)。  
 　params：アイテム(item_name, description, list_id, images)、タグ配列(tag_names)、スコア配列(scores)。  
 <br>
 　(2)paramsをアイテム／タグ配列／スコア配列に分解し、それぞれの値をレコードの更新処理に使う。  
-　31-32: deleteメソッド：paramsから削除したタグ・スコアが、削除処理の返り値となる。変数化して使い回す。  
-　33: updateメソッド：アイテムに関するデータだけが残ったparamsを使い、アイテムのレコードを更新。  
+　32-33: deleteメソッド：paramsから削除したタグ・スコアが、削除処理の返り値となる。変数化して使い回す。  
+　34: updateメソッド：アイテムに関するデータだけが残ったparamsを使い、アイテムのレコードを更新。  
 <br>
 　(3)タグをフォームに入力した場合、中間テーブルのレコード(スコアも含む)も更新、または新規保存する。  
-　36-37: first_or_createメソッド：既存タグのレコードを取得、または新規タグを保存。  
-　30: 編集前のitemに紐づく、編集前のitem_tagレコードを0〜4つ取得して配列化。  
-　38-39: updateメソッド：編集前のi番目(0〜3番目)のitem_tagに、i番目の欄に入力したtag_idとscoreを上書き。  
-　40-41: createメソッド：編集前のitem_tagがi番目に存在しない場合、i番目に入力したtag_idとscoreを保存。  
+　37-38: first_or_createメソッド：既存タグのレコードを取得、または新規タグを保存。  
+　31: 編集前のitemに紐づく、編集前のitem_tagレコードを0〜4つ取得して配列化。  
+　39-40: updateメソッド：編集前のi番目(0〜3番目)のitem_tagに、i番目の欄に入力したtag_idとscoreを上書き。  
+　41-42: createメソッド：編集前のitem_tagがi番目に存在しない場合、i番目に入力したtag_idとscoreを保存。  
 <br>
 　(4)編集画面遷移時に自動入力されたタグを削除し、空欄で送信した場合、中間テーブルのレコードも削除する。  
 　アイテムとタグの紐づけは削除するが、タグ自体はテーブルに残す(複数のユーザー・リストで使い回すため)。  
-　43-44: destroyメソッド：i番目のタグ欄が空欄の場合、編集前のitem_tagがi番目に存在するなら削除。  
+　44-45: destroyメソッド：i番目のタグ欄が空欄の場合、編集前のitem_tagがi番目に存在するなら削除。  
 <br>
-　※30行目をitem.item_tags.destroy_allとし、38-44行目をItemTag.createに一本化する方法もある。  
+　※31行目をitem.item_tags.destroy_allとし、39-45行目をItemTag.createに一本化する方法もある。  
 　その場合、updateアクションを実行するたびに、(タグやスコアを変更・削除しなくても)既存のitem_tagを全て削除するがゆえにレコードIDが欠番となり、item_tagを保存し直すがゆえにレコードIDと自動採番値が毎回増える。  
 　従って今回は、item_tagレコードを削除・再度保存する回数を減らすために、条件分岐を実装した。  
 <br>
-app/models/item_form.rb  
+app/models/item_form.rb　※ TAGS_PER_ITEM = 4  
 <img width="640" alt="画像：4-1-8(A)idea" src="app/assets/images/readme/4-1-8(A)idea.png">
 <br>
 <br>
@@ -568,7 +573,7 @@ app/controllers/lists_controller.rb
 　59: &.(セーフナビゲーション)：1つのアイテムに紐づくi番目(0〜3番目)のタグが存在し(つまりi番目のitem_tagsレコードも存在し)、かつ、item_tagsレコード内のスコアも存在する場合、タグ名の隣に「：」とスコアを表示。  
 　逆に、タグが存在しない場合、または、タグは存在するがスコアは存在しない場合、「：」もスコアも非表示。  
 <br>
-app/views/shared/_item_table.html.erb  
+app/views/shared/_item_table.html.erb　※ TAGS_IN_ROW = 4  
 <img width="720" alt="画像：4-1-9(B)idea" src="app/assets/images/readme/4-1-9(B)idea.png">
 <br>
 <br>
@@ -594,7 +599,7 @@ app/views/shared/_item_table.html.erb
 　28: 空のdiv要素：入力欄ごとに、タグ検索結果の表示領域を併設しておく。変数iで区別。  
 　inputイベントの内容に応じ、タグ名ボタンを生成。検索前の状態、または検索結果0件の時は、何も表示しない。  
 <br>
-app/views/items/_form.html.erb  
+app/views/items/_form.html.erb　※ TAGS_PER_ITEM = 4  
 <img width="720" alt="画像：4-2-1(A)idea" src="app/assets/images/readme/4-2-1(A)idea.png">
 <br>
 <br>
@@ -981,7 +986,7 @@ app/models/item_tag.rb
 ### 4-5-3. 同期の例外：複数レコード同時更新時のクエリ抑制。アイテム一覧の更新時差を維持
 　22: no_touchingメソッド：アイテム新規保存時は、最大4つの中間テーブルも併せて保存している。その際は、中間テーブル新規保存のたびにアイテム更新日時を同期させないことで、クエリ発行回数を抑える。  
 <br>
-app/models/item_form.rb  
+app/models/item_form.rb　※ TAGS_PER_ITEM = 4  
 <img width="720" alt="画像：4-1-5(A)idea" src="app/assets/images/readme/4-1-5(A)idea.png">
 <br>
 <br>
@@ -1283,7 +1288,7 @@ app/models/tag.rb
 <br>
 　14-15: each_sliceメソッド：タグレコード群を1組4つずつの配列に分割し、配列内配列を生成。ビュー側で、タグ一覧表の1行につき4列ずつのタグを表示。  
 <br>
-app/controllers/tags_controller.rb  
+app/controllers/tags_controller.rb　※ TAGS_IN_ROW = 4  
 <img width="720" alt="画像：4-9-2(A)idea" src="app/assets/images/readme/4-9-2(A)idea.png">
 <br>
 <br>
@@ -1333,7 +1338,7 @@ app/views/tags/index.html.erb
 　56-57: link_toメソッド(タグ名リンク)：アイテム検索画面、またはタグ詳細画面→タグ詳細画面。  
 　54-55: link_toメソッド(タグ名リンク)：リスト詳細画面→タグ詳細画面(遷移時、paramsにリストIDも含める)。  
 <br>
-app/views/shared/_item_table.html.erb  
+app/views/shared/_item_table.html.erb　※ TAGS_IN_ROW = 4  
 <img width="720" alt="画像：4-1-9(B)idea" src="app/assets/images/readme/4-1-9(B)idea.png">
 <br>
 <br>
